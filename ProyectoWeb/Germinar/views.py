@@ -1,4 +1,3 @@
-from contextvars import Context
 from django.shortcuts import render
 import datetime
 
@@ -19,6 +18,6 @@ def principal(request):
 
     return render(request, 'Germinar/principal.html',ctx)
 
-def plantasInterior(request):
+def catalogo(request):
 
-    return render(request, 'Germinar/plantasInterior.html')
+    return render(request, 'Germinar/catalogo.html')
