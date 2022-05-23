@@ -1,0 +1,322 @@
+{% extends "Germinar/base.html" %}
+{% block title %} Germinar tienda {% endblock %}
+<!DOCTYPE html>
+{% block content %}
+{% load static %} 
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Germina Tienda</title>
+    <link type="text/css" rel="preload" href="{% static 'Germinar/css/diseno.css'%}">
+    <link type="text/css" rel="stylesheet" href ="{% static 'Germinar/css/diseno.css'%}">
+    <link type="text/css" rel="preload" href="{% static 'Germinar/css/normalize.css'%}"> <!--Ayudará en normalizar la vista de la página para todos los navegadores, asi no habrá distinciones entre abrir la página en diferentes navegadores-->
+    <link type="text/css" rel="stylesheet" href="{% static 'Germinar/css/normalize.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script type="text/javascript">
+            //api de la luna
+
+            function load_moon_phases(obj,callback){
+                var gets=[]
+                for (var i in obj){
+                    gets.push(i + "=" +encodeURIComponent(obj[i]))
+                }
+                gets.push("LDZ=" + new Date(obj.year,obj.month-1,1) / 1000)
+                var xmlhttp = new XMLHttpRequest()
+                var url = "https://www.icalendar37.net/lunar/api/?" + gets.join("&")
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        callback(JSON.parse(xmlhttp.responseText))
+                    }
+                }
+                xmlhttp.open("GET", url, true)
+                xmlhttp.send()
+            }
+            function example_1(moon){
+                var day = new Date().getDate()
+                var dayWeek=moon.phase[day].dayWeek
+                var html = "<div>" +
+                "<b>" + moon.nameDay[dayWeek]+ "</b>" +
+                "<div>" + day + " <b>" + moon.monthName + "</b> " +
+                moon.year + "</div>" +
+                "<div shadow>" + moon.phase[day].svg + "</div>" +
+                "<div>" + moon.phase[day].phaseName + " " +
+                "" + ((moon.phase[day].isPhaseLimit )? ""  :   Math.round(moon.phase[day].lighting) + "%") +
+                "</div>" +
+                "</div>"
+                document.getElementById("ex1").innerHTML = html
+            }
+            var configMoon = {
+                lang  		:'es',
+                month 		:new Date().getMonth() + 1,
+                year  		:new Date().getFullYear(),
+                size		:150, 
+                lightColor	:"rgb(255,255,210)",
+                shadeColor	:"black",
+                texturize	:false,
+            }
+            load_moon_phases(configMoon,example_1)
+
+            //api de youtube
+
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                height: '360',
+                width: '550',
+                videoId: 'GZHvN4rPoqw',
+                events: {
+                    'onReady': onPlayerStateChange,
+                    'onStateChange': onPlayerStateChange
+                }});
+            }
+
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                event.target.playVideo();
+            }
+
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            var done = false;
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+                }
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+
+        </script>
+<body style="background-image: linear-gradient(to bottom, #C7D0D8 30%, white 100%);">
+    <div id="carrusel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="#"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel1.jpg' %}" class="d-block w-100" alt="..."></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Bienvenido {{nombre_usuario}} {{apellido_usuario}}</h5>
+                    <p>Registrate y s&eacute; parte de nuestra comunidad</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="#donaciones"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel2.jpg' %}"class="d-block w-100" alt="..."></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>¡Colabora con nosotros!</h5>
+                    <p>Ay&uacute;danos a alcanzar nuestras metas.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="#historia"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel3.jpg' %}" class="d-block w-100" alt="..."></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Conoce nuestra historia</h5>
+                    <p>Conoce quienes somos y c&oacute;mo surgi&oacute; esta iniciativa.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <!--CARRUSEL-->
+    <div class="contenedor2 ">
+        <section class="contenedor3">
+            <h1>Nuestro Cat&aacute;logo</h1>
+            <div class="catalogo">
+                <div class="card">
+                    <div class="face front">
+                        <img src="{% static 'Germinar/img/exterior.png' %}" alt="Plantas exterior">
+                        <h3>Plantas de Exterior</h3>
+                    </div>
+                    <div class="face back">
+                        <h3>Plantas de Exterior</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
+                        <div class="link">
+                            <a href="#">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="face front">
+                        <img src="{% static 'Germinar/img/interior.jpg' %}" alt="Planta interior">
+                        <h3>Plantas de Interior</h3>
+                    </div>
+                    <div class="face back">
+                        <h3>Plantas de Interior</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
+                        <div class="link">
+                            <a href="plantas-interior.html">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="face front">
+                        <img src="{% static 'Germinar/img/heramientas-de-jardineria.jpg' %}" alt="Articulos">
+                        <h3>Articulos de jard&iacute;n</h3>
+                    </div>
+                    <div class="face back">
+                        <h3>Articulos de jard&iacute;n</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
+                        <div class="link">
+                            <a href="#">Ver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="face front">
+                        <img src="{% static 'Germinar/img/ofertas.jpg' %}" alt="Ofertas">
+                        <h3>Ofertas</h3>
+                    </div>
+                    <div class="face back">
+                        <h3>Ofertas</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
+                        <div class="link">
+                            <a href="#">Ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div><!--CATALOGO-->
+
+    <section class="luna_parte1 contenedor1">
+        <div class="titulo-luna"  style="color:#ffff; padding: 2rem;">
+            <h2 style=" font-size: 2rem; font-weight: bold; border-bottom: solid 2px #f3f3f3; ; ">La luna y su efecto en el crecimiento de las plantas</h2>
+        </div>
+        <div class="formato_luna contenedor2" style="text-align:center; color: #ffff ; padding-bottom: 2rem;">
+            <div class="formato_video ratio ratio-16x9">
+                <div id="player" class="video" style="padding-bottom: 2rem ;"></div>
+            </div>
+            <div id="ex1">
+                <div>
+                    <b>Martes</b>
+                    <div>3 <b>Mayo</b> 2022</div>
+                    <div shadow="">
+                        <svg width="150" height="150" viewBox="0 0 100 100">
+                            <g>
+                                <circle cx="50" cy="50" r="49" stroke="none" fill="black"></circle>
+                                <path d="M 50 1 A 49,49 0 0,1 49,99 A 42.14,49 0 1,0 50,1" stroke-width="0" stroke="none" fill="rgb(255,255,210)"></path>
+                                <a xlink:href="https://www.icalendar37.net/lunar/app/" rel="noopener noreferrer" target="_blank">
+                                    <circle cx="50" cy="50" r="49" style="pointer-events:all;cursor:pointer" stroke-width="0" fill="transparent"></circle>
+                                </a>
+                            </g>
+                        </svg>
+                    </div>
+                    <div>Creciente 7%</div>
+                </div>
+            </div>
+        </div>
+    </section><!--API LUNA-->
+    <div class="contenedor2 ">
+        <main class="historia-img sombra" id="historia">    
+                <section class="historia">
+                    <h2>¿Quienes somos?</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dolor sem, aliquam nec diam id, gravida venenatis eros. Vivamus id pellentesque lectus. Vestibulum dignissim imperdiet nisl, nec varius magna molestie vel. Maecenas faucibus libero lectus, ac venenatis neque efficitur a. Vivamus rhoncus, risus quis feugiat suscipit, lorem leo tincidunt turpis, a ultricies odio leo vel tellus. Nulla tellus enim, ultricies in libero ac, volutpat mattis ligula. Praesent imperdiet, elit eu ullamcorper porttitor, metus nulla ultricies tellus, ac mattis ante leo a nisl. Integer porta viverra magna, vel consectetur ex pharetra sed. Donec ultricies luctus auctor.
+                    Vivamus bibendum nisi est, sed aliquet sapien pretium vitae. Proin lacinia, turpis consequat ornare porta, enim dolor consectetur dui, eget placerat leo nibh facilisis arcu. Nullam consectetur luctus elit, quis molestie diam tristique sed. Cras non sapien justo. Donec pellentesque ex laoreet tellus maximus vestibulum. Suspendisse euismod, mauris id elementum aliquet, turpis diam auctor ex, in ultrices sem erat ut velit. Nunc in sodales ipsum, sed fringilla massa. Praesent rhoncus, felis vel pellentesque vulputate, nulla dolor commodo nisl, sed suscipit sem nulla in arcu. Vivamus finibus molestie rutrum. Nam semper nisi augue, eu fermentum nisl iaculis a.</p>
+                </section>
+                <section class="imagenes">
+                    <img src="{% static 'Germinar/img/historia1.jpg' %}" alt="historia1">
+                    <img src="{% static 'Germinar/img/historia4.jpg' %}" alt="historia4">
+                </section>
+        </main> 
+    </div> <!--CUADRO HISTORIA-->
+    <section class="donaciones" id="donaciones">
+        <div class="cuadro-donaciones contenedor2" id="cuadro-donaciones">
+            <div class="titulo-donacion">
+                <h1>Colabora con nosotros</h1>
+            </div>
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Suscripci&oacute;n Semilla</h5>
+                    <p class="card-text"> $3.000</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-leaf" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                        <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" />
+                        </svg> Lorem ipsum dolor sit amet</li>
+                    <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-leaf" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                        <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" />
+                        </svg> Lorem ipsum dolor sit amet</li>
+                    <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-leaf" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                        <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" />
+                        </svg> Lorem ipsum dolor sit amet</li>
+                </ul>
+                <div class="card-bottom card-body">
+                    <a href="#" class="card-link">Colabora ahora</a>
+                </div>
+            </div>
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Suscripci&oacute;n Germinar</h5>
+                    <p class="card-text">$30.000 <span>c/a&ntilde;o</span></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-leaf" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                        <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" />
+                        </svg> Lorem ipsum dolor sit amet</li>
+                    <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-leaf" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                        <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" />
+                        </svg> Lorem ipsum dolor sit amet</li>
+                    <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-leaf" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                        <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3z" />
+                        </svg> Lorem ipsum dolor sit amet</li>
+                </ul>
+                <div class="card-bottom card-body">
+                    <a href="formulario.html" class="card-link">Colabora ahora</a>
+                </div>
+            </div>
+        </div>
+    </section><!--DONACIONES-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'Germinar/js/script.js'%}"></script>
+</body>
+</html>
+{% endblock %}
