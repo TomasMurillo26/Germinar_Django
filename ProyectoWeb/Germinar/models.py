@@ -19,4 +19,5 @@ class cliente(models.Model):
     idCliente = models.IntegerField(primary_key=True, verbose_name= 'Id cliente')
     nombreCliente = models.CharField(max_length=50, verbose_name= 'Nombre cliente' )
     #categoria = models.foreignKey(Categoria, on_delete=models.CASCADE) Asi indicamos las llaves foraneas
-
+    def __str__(self):
+        return self.nombreCliente
