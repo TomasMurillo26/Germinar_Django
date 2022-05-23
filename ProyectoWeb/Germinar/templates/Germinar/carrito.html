@@ -1,4 +1,8 @@
+{% extends "Germinar/base.html" %}
+{% block title %} Germinar tienda {% endblock %}
 <!DOCTYPE html>
+{% block content %}
+{% load static %} 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,71 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
 <body style="background-image: linear-gradient(to bottom, #C7D0D8 30%, white 100%);">
-    <header>
-        <header-top class="encabezado">
-            <div class="logo">
-                <img class="logo-germinar" src="CSS/img/2022-03-31_10-45-38.png" alt="logo">
-            </div>
-            <div class="nav-encabezado">
-                <!-- Button trigger modal -->
-                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="modal" id="show-modal">Iniciar Sesi&oacute;n
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <circle cx="12" cy="7" r="4" />
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                        </svg>
-                    </span>
-                </a>
-                <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header usuario_encabezado">
-                        <button style="color: white;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body login_body">
-                            <fieldset class="usuario_informacion">
-                                    <div class="formulario">
-                                        <label >Correo</label>
-                                        <input type="email" placeholder="Escribir Correo">
-                                        <label>Contrase&ntilde;a</label>
-                                        <input type="text" placeholder="Escribir Contrase&ntilde;a">
-                                        <a href="#" class="">¿Eres nuevo?</a>
-                                    </div>
-                                    <div class="botones">
-                                        <div class="btn_iniciar">
-                                            <button type="button" class="btn btn-outline-success">Iniciar sesion</button>
-                                        </div>
-                                        <div class="btn_salir">
-                                            <button type="button" class="btn btn-outline-danger">Salir</button>
-                                        </div>
-                                    </div>
-                            </fieldset>
-                            <div class="logo_sesion">
-                                <img src="CSS/img/2022-03-31_10-45-38.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <a href="#">Mi carrito <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <circle cx="6" cy="19" r="2" />
-                    <circle cx="17" cy="19" r="2" />
-                    <path d="M17 17h-11v-14h-2" />
-                    <path d="M6 5l14 1l-1 7h-13" />
-                    </svg></span>
-                </a>
-            </div>
-        </header-top> <!--ENCABEZADO-->
-    </header>
-    <div class="nav-bg sombra sticky" id="nav-bg"> 
-        <nav class="nav-principal contenedor">
-            <a href="#">Inicio</a>
-            <a href="#">Tienda Online</a>
-            <a href="seguimientoEnLinea.html">Seguimiento en l&iacute;nea</a>
-        </nav>
-        <!--NAVEGACIÓN-->
+
     <section class="contenedor3">
         <h1>Tus productos</h1>
     </section>
@@ -148,3 +88,4 @@
         <script src="js/script.js"></script>
 </body>
 </html>
+{% endblock %}
