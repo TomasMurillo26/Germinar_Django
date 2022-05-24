@@ -37,3 +37,7 @@ def planta(request):
 def seguimiento(request):
 
     return render(request, 'Germinar/seguimiento.html')
+
+def base(request):
+
+    return render(request, 'Germinar/base.html')
