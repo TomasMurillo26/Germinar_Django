@@ -21,3 +21,19 @@ def principal(request):
 def catalogo(request):
 
     return render(request, 'Germinar/catalogo.html')
+
+def carrito(request):
+
+    return render(request, 'Germinar/carrito.html')
+
+def formulario(request):
+
+    return render(request, 'Germinar/formulario.html')
+
+def planta(request):
+
+    return render(request, 'Germinar/planta.html')
+
+def seguimiento(request):
+
+    return render(request, 'Germinar/seguimiento.html')
