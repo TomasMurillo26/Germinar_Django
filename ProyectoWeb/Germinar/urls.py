@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import base, formulario, principal, catalogo, seguimiento, planta, carrito, base 
+from .views import principal, catalogo, formulario, seguimiento, base, planta, carrito
 
 urlpatterns = [
-    path('', principal, name='principal'),
-    path('', catalogo, name='catalogo'),
-    path('', formulario, name='formulario'),
-    path('', seguimiento, name='seguimiento'),
-    path('', planta, name='planta'),
-    path('', carrito, name='carrito'),
-    path('', base, name='base'),
+    path('catalogo', catalogo, name='catalogo'),
+    path('formulario', formulario, name='formulario'),
+    path('seguimiento', seguimiento, name='seguimiento'),
+    path('planta', planta, name='planta'),
+    path('', base, name='base/'),
+    path('carrito', carrito, name='carrito'),
+    path('principal/', principal, name='principal'),
 ]
