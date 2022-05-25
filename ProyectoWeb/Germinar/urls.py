@@ -6,7 +6,7 @@ urlpatterns = [
     path('formulario', formulario, name='formulario'),
     path('seguimiento', seguimiento, name='seguimiento'),
     path('planta', planta, name='planta'),
-    path('', base, name='base/'),
+    path('', base, name='base'),
     path('carrito', carrito, name='carrito'),
     path('principal/', principal, name='principal'),
 ]
