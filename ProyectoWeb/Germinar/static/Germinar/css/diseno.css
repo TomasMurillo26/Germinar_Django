@@ -1447,6 +1447,7 @@ NAV
         }
 
         .contenedor-form {
+            background-color: transparent;
             margin: 0 auto;
             justify-content: flex-start;
             width: min(60rem, 100%);

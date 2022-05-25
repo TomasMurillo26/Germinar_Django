@@ -21,10 +21,10 @@ class cliente(models.Model):
     contrasenna = models.CharField(max_length=50, verbose_name='Contrasenna')
     correoElect = models.CharField(max_length=70, verbose_name='Correo Electronico')
     fechaNac = models.DateField(verbose_name='Fecha de nacimiento')
-    suscripcion = models.ForeignKey(catSuscripcion, verbose_name= 'Tipo suscripcion')
+    suscripcion = models.ForeignKey(catSuscripcion, on_delete=models.CASCADE)
     ciudadCliente = models.CharField(max_length=50, verbose_name='Ciudad')
     regionCliente = models.CharField(max_length=50, verbose_name='Region')
-    
+    #categoria = models.foreignKey(Categoria, on_delete=models.CASCADE) Asi indicamos las llaves foraneas
     def __str__(self):
         return self.nombreCliente
 
