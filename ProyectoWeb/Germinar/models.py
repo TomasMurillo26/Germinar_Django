@@ -53,25 +53,24 @@ class compra(models.Model):
         ('R','Recibido')
     )
     idCompra = models.IntegerField(primary_key=True, verbose_name='Id compra')
-    idCliente= models.ForeignKey(cliente, primary_key=True, on_delete=models.CASCADE)
+    idCliente= models.ForeignKey(cliente, on_delete=models.CASCADE)
     estadoCompra= models.CharField(max_length=2, choices=ESTADO_COMPRA)
     total= models.PositiveIntegerField(verbose_name='Total compra')
-    suscripcion= models.ForeignKey(cliente, on_delete=models.CASCADE)
 
     def descuento(self):
-        if self.suscripcion == 'Germinar':
+        if self.idCliente == 'Germinar':
             return "Tiene descuento"
         else:
             return "No tiene descuento"
 
-    descuentoCli= models.CharField(descuento, verbose_name='Descuento cliente')
+    descuentoCli= models.CharField(descuento, max_length=30)
 
     def __str__(self):
         return self.idCompra
 
 class detalleCompra(models.Model):
-    idCompra = models.ForeignKey(compra, primary_key=True, verbose_name='Id compra')
-    idProducto = models.ForeignKey(producto, primary_key=True, verbose_name='Id producto')
+    idCompra = models.ForeignKey(compra, primary_key=True, on_delete=models.CASCADE)
+    idProducto = models.ForeignKey(producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(verbose_name='Cantidad de productos')
     total = models.PositiveIntegerField(verbose_name='Total compra')
 
