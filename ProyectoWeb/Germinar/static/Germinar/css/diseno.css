@@ -2170,13 +2170,13 @@ NAV
         border-radius: 1rem;
         padding: 2rem;
         color: var(--gris);
-        background-image: url(img/estrellas115.png);
+        background: url("/static/img/estrellas115.png");
     }
 }
 
 @media (min-width: 1040px){
     .luna_parte1 {
-        background-image: url(img/estrellas115.png);
+        background: url("/static/img/estrellas115.png");
     }
 }
 
