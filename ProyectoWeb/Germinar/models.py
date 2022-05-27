@@ -32,7 +32,7 @@ class cliente(models.Model):
     direccion = models.CharField(max_length=200, verbose_name='Direccion cliente')
     #categoria = models.foreignKey(Categoria, on_delete=models.CASCADE) Asi indicamos las llaves foraneas
     def __str__(self):
-        return self.nombreCliente, self.suscripcion
+        return self.nombreCliente
 
 class producto(models.Model):
     idProducto = models.IntegerField(primary_key=True, verbose_name= 'Id producto')
@@ -43,7 +43,7 @@ class producto(models.Model):
     vendedor = models.ForeignKey(cliente, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.idProducto, self.nombreProducto
+        return self.nombreProducto
 
 
 class compra(models.Model):

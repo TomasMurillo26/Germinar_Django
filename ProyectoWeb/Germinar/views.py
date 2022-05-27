@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import datetime
+from .forms import clienteForm
 
 # Create your views here.
 
@@ -27,8 +28,18 @@ def carrito(request):
     return render(request, 'Germinar/carrito.html')
 
 def formulario(request):
+    
+    datos= {
+        'form': clienteForm()
+    }
 
-    return render(request, 'Germinar/formulario.html')
+    if request.method=='POST':
+        formulario= clienteForm(request.POST)
+
+        if formulario.is_valid:
+            formulario.save()
+
+    return render(request, 'Germinar/formulario.html',datos)
 
 def planta(request):
 
@@ -41,3 +52,4 @@ def seguimiento(request):
 def base(request):
 
     return render(request, 'Germinar/base.html')
+
