@@ -2,6 +2,7 @@ from django.shortcuts import render
 import datetime
 from .forms import clienteForm
 
+
 # Create your views here.
 
 class Persona(object):
@@ -36,10 +37,13 @@ def formulario(request):
     if request.method=='POST':
         formulario= clienteForm(request.POST)
 
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
+            datos['mensaje']="Guardado correctamente"
+            formulario= clienteForm()
 
     return render(request, 'Germinar/formulario.html',datos)
+
 
 def planta(request):
 

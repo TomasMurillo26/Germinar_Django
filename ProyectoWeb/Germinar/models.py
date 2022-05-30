@@ -21,15 +21,14 @@ class catSuscripcion(models.Model):
         return self.nombreSuscripcion
 
 class cliente(models.Model):
-    idCliente = models.IntegerField(primary_key=True, verbose_name= 'Id cliente')
+    idCliente = models.AutoField(primary_key=True, verbose_name= 'Id cliente')
     nombreCliente = models.CharField(max_length=50, verbose_name= 'Nombre cliente' )
-    contrasenna = models.CharField(max_length=50, verbose_name='Contrasenna')
-    correoElect = models.CharField(max_length=70, verbose_name='Correo Electronico')
+    correoElect = models.EmailField(max_length=70, verbose_name='Correo Electronico')
     fechaNac = models.DateField(verbose_name='Fecha de nacimiento')
     suscripcion = models.ForeignKey(catSuscripcion, null=True, on_delete=models.CASCADE)
     ciudadCliente = models.CharField(max_length=50, verbose_name='Ciudad')
     regionCliente = models.CharField(max_length=50, verbose_name='Region')
-    direccion = models.CharField(max_length=200, verbose_name='Direccion cliente')
+    direccion = models.CharField(max_length=100, verbose_name='Direccion cliente')
     #categoria = models.foreignKey(Categoria, on_delete=models.CASCADE) Asi indicamos las llaves foraneas
     def __str__(self):
         return self.nombreCliente

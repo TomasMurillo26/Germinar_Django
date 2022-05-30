@@ -172,22 +172,23 @@
             <div class="subt-pago">
                 <h2>Ingrese sus datos</h2>
             </div>
-            <form action="#" method="get" class="form-usuario contenedor2" name="form-usuario" id="form-usuario">
+            <form action="#" method="POST" class="form-usuario contenedor2" name="form-usuario" id="form-usuario">
+                {% csrf_token %}
                 <div class="mb-3">
-                    <label for="exampleInputName" class="form-label-usu">Nombre Completo</label>
-                    <input type="text" minlength="10" maxlength="50" class="form-control-usu" name="nombre" id="nombre" onchange="habilitarbtn()" required="required"
+                    <label for="{{ form.nombreCliente.id_for_label }}" class="form-label-usu">Nombre Completo</label>
+                    <input type="text" minlength="10" maxlength="50" class="form-control-usu" name="{{form.nombreCliente.html_name}}" id="nombre" onchange="habilitarbtn()" required="required"
                         placeholder="Ingresar nombre y apellidos">
                     <div id="emailHelp" class="form-text"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label-usu">Correo Electr&oacute;nico</label>
-                    <input type="email" class="form-control-usu"  minlength="10" maxlength="50" name="email" id="email" onchange="habilitarbtn()" required="required"
+                    <label for="{{ form.correoElect.id_for_label }}" class="form-label-usu">Correo Electr&oacute;nico</label>
+                    <input type="email" class="form-control-usu"  minlength="10" maxlength="70" name="{{form.correoElect.html_name}}" id="email" onchange="habilitarbtn()" required="required"
                         placeholder="Ejemplo: nombreCorreo@gmail.com">
                     <div id="emailHelp" class="form-text"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label-usu">Contrase&ntilde;a</label>
-                    <input type="password" class="form-control-usu"  minlength="8" maxlength="20" name="password" id="password" onchange="habilitarbtn()" required="required"
+                    <label for="#" class="form-label-usu">Contrase&ntilde;a</label>
+                    <input type="password" class="form-control-usu"  minlength="8" maxlength="20" name="contrasenna" id="password" onchange="habilitarbtn()" required="required"
                         placeholder="La contrase&ntilde;a debe tener un largo minimo de 8 y maximo de 20 caracteres.">
                     <div class="mostrar-contrasenna">
                         <button class="btn-mostrar btn-primary" type="button" onclick="mostrarContrasena()">Mostrar
@@ -199,17 +200,17 @@
                     <input type="password" class="form-control-usu" onchange="habilitarbtn()" minlength="8" maxlength="20" name="reppassword" id="reppassword" required="required"> 
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label-usu">Direcci&oacute;n</label>
-                    <input type="text" class="form-control-usu" onchange="habilitarbtn()" minlength="10" maxlength="20" name="direccion" id="direccion" placeholder="Pasaje / Calle" required="required">
+                    <label for="{{ form.direccion.id_for_label }}" class="form-label-usu">Direcci&oacute;n</label>
+                    <input type="text" class="form-control-usu" onchange="habilitarbtn()" minlength="10" maxlength="100" name="{{form.direccion.html_name}}" id="direccion" placeholder="Pasaje / Calle" required="required">
                 </div>
                     <div class="comuna-region">
-                        <select type="text" class="tam-region" id="regiones" onchange="habilitarbtn()" required="required"></select>
-                        <select type="text" class="tam-region" id="comunas" onchange="habilitarbtn()" required="required"></select>
+                        <select for="{{ form.regionCliente.id_for_label }}" type="text" class="tam-region" name="{{ form.regionCliente.html_name }}" id="regiones" onchange="habilitarbtn()" required="required"></select>
+                        <select for="{{ form.ciudadCliente.id_for_label }}" type="text" class="tam-region" name="{{ form.ciudadCliente.html_name }}" id="comunas" onchange="habilitarbtn()" required="required"></select>
                     </div>
                 <div class="mb-3 formato-date ">
                     <label class="form-label">Fecha de nacimiento (d&iacute;a/mes/a&ntilde;o) </label>
                     <div class="input-group date tm-date">
-                        <input type="text" class="form-control" readonly name="fecha" onchange="habilitarbtn()" id="fecha" required
+                        <input for="{{ form.fechaNac.id_for_label }}" type="text" class="form-control" readonly name="{{ form.fechaNac.html_name }}"" onchange="habilitarbtn()" id="fecha" required
                             placeholder="Presionar para a&ntilde;adir fecha"><span class="input-group-addon"><i
                                 class="glyphicon glyphicon-th"></i></span>
                     </div>
@@ -230,12 +231,15 @@
                         <div class="total">
                             <h2>$30.000</h2>
                         </div>
-                        <div class="btn-pago">
-                            <button type="submit" id="submitButton" class="btn-submit lost btn-primary-listo"  disabled>Pagar</button>
-                        </div>
-                    </div>
+
+                    <div class="btn-pago">
+                        <button type="submit" id="submitButton" class="btn-submit btn-primary-listo">Pagar</button>
+                    </div>    
                 </div>
             </form>
+            <div class="alert alert-success" role="alert">
+                {{mensaje}}
+            </div>
             <!--OPCIONES DE PAGO-->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
