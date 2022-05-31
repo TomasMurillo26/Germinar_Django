@@ -14,3 +14,16 @@ class clienteForm(ModelForm):
             'regionCliente',
             'direccion',
         ] 
+
+class productoForm(ModelForm):
+
+    class Meta:
+        model = producto
+        fields = [
+            'nombreProducto',
+            'cantidad',
+            'precio',
+            'imagenProducto',
+            'categoria',
+            'descripcion',
+        ]

@@ -21,7 +21,7 @@ class catSuscripcion(models.Model):
         return self.nombreSuscripcion
 
 class cliente(models.Model):
-    idCliente = models.AutoField(primary_key=True, verbose_name= 'Id cliente')
+    idCliente = models.IntegerField(primary_key=True, verbose_name= 'Id cliente')
     nombreCliente = models.CharField(max_length=50, verbose_name= 'Nombre cliente' )
     correoElect = models.EmailField(max_length=70, verbose_name='Correo Electronico')
     fechaNac = models.DateField(verbose_name='Fecha de nacimiento')
@@ -37,6 +37,8 @@ class producto(models.Model):
     idProducto = models.IntegerField(primary_key=True, verbose_name= 'Id producto')
     nombreProducto = models.CharField(max_length=150, verbose_name= 'Nombre del producto')
     cantidad = models.PositiveIntegerField(verbose_name='Stock del producto')
+    precio = models.PositiveIntegerField(verbose_name='Precio del producto')
+    imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen') 
     categoria = models.ForeignKey(catProducto, on_delete=models.CASCADE)
     descripcion = models.TextField(verbose_name='Descripcion producto')
     vendedor = models.ForeignKey(cliente, on_delete=models.CASCADE)

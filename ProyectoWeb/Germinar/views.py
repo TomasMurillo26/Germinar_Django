@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import datetime
-from .forms import clienteForm
+from .models import producto
+from .forms import clienteForm, productoForm, catProducto
 
 
 # Create your views here.
@@ -28,6 +29,16 @@ def carrito(request):
 
     return render(request, 'Germinar/carrito.html')
 
+def listaProductos(request):
+
+    productos= producto.objects.all()
+
+    contexto={
+        'productos':productos
+    }
+
+    return render(request, 'Germinar/listadoProductos.html',contexto)
+
 def formulario(request):
     
     datos= {
@@ -43,6 +54,27 @@ def formulario(request):
             formulario= clienteForm()
 
     return render(request, 'Germinar/formulario.html',datos)
+
+def agregarProducto(request):
+    
+    categorias= catProducto.objects.all()
+
+
+
+    datos= {
+        'form': productoForm(),
+        'categorias':categorias
+    }
+
+    if request.method=='POST':
+        formulario= productoForm(request.POST)
+
+        if formulario.is_valid():
+            formulario.save()
+            datos['mensaje']="Guardado correctamente"
+            formulario= productoForm()
+
+    return render(request, 'Germinar/agregarProducto.html',datos)
 
 
 def planta(request):
