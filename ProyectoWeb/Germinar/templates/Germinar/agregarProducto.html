@@ -33,19 +33,19 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="{{ form.nombreProducto.id_for_label }}" class="form-label-prod">Nombre producto</label>
-                    <input type="text" minlength="10" maxlength="50" class="form-control-prod" name="{{form.nombreProducto.html_name}}" id="nombreProd" onchange="habilitarbtn()" required="required">
+                    <input type="text" minlength="10" maxlength="50" class="form-control-prod" name="{{form.nombreProducto.html_name}}" id="nombreProd" onchange="habilitarbtn()">
                     <div id="" class="form-text"></div>
                 </div>
                 <div class="mb-3">
                     <label for="{{ form.cantidad.id_for_label }}" class="form-label-prod">Cantidad</label>
                     <span style="font-size: 20px; padding: 10px; width: 30%;" class="input-group-text">
-                    <input type="number" class="form-control-prod" value="1" min="1" name="{{form.cantidad.html_name}}" id="cantidad" onchange="habilitarbtn()" required="required">
+                    <input type="number" class="form-control-prod" value="0" min="1" name="{{form.cantidad.html_name}}" id="cantidad" onchange="habilitarbtn()" required="required">
                     <div id="emailHelp" class="form-text"></div>
                 </div>
                 <label for="{{form.precio.id_for_label}}" class="form-label-prod">Precio</label>
                 <div class="input-group mb-3">
                     <span style="font-size: 20px; padding: 10px;" class="input-group-text">$
-                    <input style="margin-left:10px;" type="text" class="form-control-prod" name="{{form.precio.html_name}}" id="precio" onchange="habilitarbtn()" required="required" ></span>
+                    <input style="margin-left:10px;" type="number" class="form-control-prod" name="{{form.precio.html_name}}" id="precio" onchange="habilitarbtn()" required="required" ></span>
                 </div>
                 <label for="{{form.categoria.id_for_label}}" class="form-label-prod">Categor&iacute;a del producto</label>
                 <select class="form-select-prod" name="{{form.categoria.html_name}}" id="categoria" aria-label="Default select example">
@@ -63,6 +63,7 @@
                     <div class="cuadro-file contenedor2">
                         <input class="imagen-producto" type="file" id="seleccionArchivos" accept="image/" required="required">
                     </div>
+                    <br>
                     <div class="cuadro-view contenedor2 ">
                         <img id="imagenPrevisualizacion" alt="">
                     </div>
