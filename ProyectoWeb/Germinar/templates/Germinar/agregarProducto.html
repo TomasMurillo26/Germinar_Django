@@ -29,7 +29,7 @@
             <div class="subt-pago">
                 <h2>Agregar producto</h2>
             </div>
-            <form action="#" method="POST" class="form-usuario contenedor2" name="form-producto" id="form-producto">
+            <form action="#" method="POST" enctype="multipart/form-data" class="form-usuario contenedor2" name="form-producto" id="form-producto">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="{{ form.nombreProducto.id_for_label }}" class="form-label-prod">Nombre producto</label>
@@ -38,19 +38,17 @@
                 </div>
                 <div class="mb-3">
                     <label for="{{ form.cantidad.id_for_label }}" class="form-label-prod">Cantidad</label>
-                    <input type="number" class="form-control-prod" value="0" min="1" name="{{form.cantidad.html_name}}" id="cantidad" onchange="habilitarbtn()" required="required">
+                    <span style="font-size: 20px; padding: 10px; width: 30%;" class="input-group-text">
+                    <input type="number" class="form-control-prod" value="1" min="1" name="{{form.cantidad.html_name}}" id="cantidad" onchange="habilitarbtn()" required="required">
                     <div id="emailHelp" class="form-text"></div>
                 </div>
+                <label for="{{form.precio.id_for_label}}" class="form-label-prod">Precio</label>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">$</span>
-                    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-                </div>
-                <div class="mb-3">
-                    <label for="{{form.precio.id_for_label}}" class="form-label-prod">Precio</label>
-                    <input type="text" class="form-control-prod"  min="1" name="{{form.precio.html_name}}" id="precio" onchange="habilitarbtn()" required="required">
+                    <span style="font-size: 20px; padding: 10px;" class="input-group-text">$
+                    <input style="margin-left:10px;" type="text" class="form-control-prod" name="{{form.precio.html_name}}" id="precio" onchange="habilitarbtn()" required="required" ></span>
                 </div>
                 <label for="{{form.categoria.id_for_label}}" class="form-label-prod">Categor&iacute;a del producto</label>
-                <select class="form-select-prod" name="{{form.categoria.html_name}}" aria-label="Default select example">
+                <select class="form-select-prod" name="{{form.categoria.html_name}}" id="categoria" aria-label="Default select example">
                     <option selected>Selecciona una categor&iacute;a</option>
                     {% for cat in categorias %}
                         <option value="1">{{cat.nombreCategoria}}</option>
@@ -58,22 +56,25 @@
                 </select>
                 <div class="mb-3">
                     <label for="{{ form.descripcion.id_for_label }}" class="form-label-prod">Descripci&oacute;n</label>
-                    <textarea type="text" class="form-control-prod" onchange="habilitarbtn()" minlength="10" maxlength="500" name="{{form.descripcion.html_name}}" id="descripcion" placeholder="Maximo 500 palabras" required="required"></textarea>
+                    <textarea type="text" class="form-control-prod" onchange="habilitarbtn()" minlength="10" 
+                    maxlength="1000" name="{{form.descripcion.html_name}}" id="descripcion" placeholder="Maximo 1000 caracteres"></textarea>
                 </div>
-                {% csrf_token %}
-                <div class="col-md-8">
-                    {% if obj.imagenProducto %}
-                    <img src="{{obj.imagenProducto.url}}" alt="imagenProducto" width="100%">
-                    {% endif %}
-                </div>
-                    
-                <div class="col-md-2">
-                    <input type="file" name="imagen" id="id_imagen" accept="image/">
-                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <input class="imagen-producto" type="file" id="seleccionArchivos" accept="image/" required="required">
+                    </div>
+                    <div class="col-md-8">
+                        <img id="imagenPrevisualizacion" alt="" width="100%">
+                    </div>
+                </div>  
                 <div class="contenedor2">
-                    <div class="btn-pago">
-                        <button type="submit" id="submitButton" class="btn-submit btn-primary-listo">Pagar</button>
+                    <div class="btn-registrar">
+                        <button type="submit" id="submitButton" class="btn-submit btn-primary-listo">Registrar nuevo producto</button>
                     </div>    
+                </div>
+
+                <div class="boton-volver contenedor2">
+                    <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">Volver</button>
                 </div>
 
                 <div class="alert alert-success" role="alert" hidden>
@@ -82,6 +83,14 @@
             </form>
         </div>      
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'Germinar/js/script.js' %}"></script>
+    <script src="{% static 'Germinar/js/calendario.js' %}"></script>
 </body>
 </html>
 {% endblock %}

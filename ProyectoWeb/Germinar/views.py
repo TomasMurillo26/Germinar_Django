@@ -56,18 +56,15 @@ def formulario(request):
     return render(request, 'Germinar/formulario.html',datos)
 
 def agregarProducto(request):
-    
     categorias= catProducto.objects.all()
-
-
 
     datos= {
         'form': productoForm(),
-        'categorias':categorias
+        'categorias':categorias,  
     }
 
     if request.method=='POST':
-        formulario= productoForm(request.POST)
+        formulario= productoForm(request.POST, files=request.FILES)
 
         if formulario.is_valid():
             formulario.save()

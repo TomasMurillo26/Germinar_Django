@@ -1475,7 +1475,6 @@ NAV
         }
 
 
-
         .input-group input[type="text"] {
             border: solid 1px black;
             width: min(60rem, 100%);
@@ -2227,4 +2226,20 @@ NAV
 .lista{
     padding: 2rem;
     margin-left: 50%;
+}
+
+/*************************AGREGAR PRODUCTO***************************/
+
+.col-md-2 input{
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.btn-registrar{
+    text-align: center;
+    background-color: var(--verdeOscuro);
+}
+
+.btn-registrar button{
+    font-size: 2rem;
 }

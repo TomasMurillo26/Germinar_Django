@@ -47,7 +47,6 @@ class Migration(migrations.Migration):
                 ('idCompra', models.IntegerField(primary_key=True, serialize=False, verbose_name='Id compra')),
                 ('estadoCompra', models.CharField(choices=[('EE', 'En espera para despacho'), ('EC', 'En camino'), ('R', 'Recibido')], max_length=2)),
                 ('total', models.PositiveIntegerField(verbose_name='Total compra')),
-                ('descuentoCli', models.CharField(max_length=30, verbose_name=Germinar.models.compra.descuento)),
                 ('idCliente', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Germinar.cliente')),
             ],
         ),

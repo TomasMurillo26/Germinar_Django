@@ -30,7 +30,26 @@ $(document).ready(function () {
     });
 
 
-    
+    const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
+        $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+
+    // Escuchar cuando cambie
+    $seleccionArchivos.addEventListener("change", () => {
+        // Los archivos seleccionados, pueden ser muchos o uno
+        const archivos = $seleccionArchivos.files;
+        // Si no hay archivos salimos de la función y quitamos la imagen
+        if (!archivos || !archivos.length) {
+            $imagenPrevisualizacion.src = "";
+            return;
+        }
+        // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+        const primerArchivo = archivos[0];
+        // Lo convertimos a un objeto de tipo objectURL
+        const objectURL = URL.createObjectURL(primerArchivo);
+        // Y a la fuente de la imagen le ponemos el objectURL
+        $imagenPrevisualizacion.src = objectURL;
+    });
+
     //***************************VALIDACIONES*************************************/
     $("#form-sus").validate({
         rules: {
@@ -113,6 +132,58 @@ $(document).ready(function () {
             }
         }
     });
+
+    $("#form-producto").validate({
+        rules: {
+            nombreProd: {
+                required: true,
+                minlength: 10
+            },
+            cantidad: {
+                required: true,
+                min: 1,
+                number: true
+            },
+            precio: {
+                required: true,
+                number: true
+            },
+            categoria: {
+                required: true,
+            },
+            descripcion: {
+                minlength: 100
+            },
+            seleccionaArchivos: {
+                required: true,
+                url: true
+            },
+        },
+        messages: {
+            nombreProd: {
+                required: "Debes ingresar el nombre del producto",
+                minlength: "El campo debe tener mínimo 10 caracteres"
+            },
+            cantidad: {
+                required: "Debes ingresar una cantidad",
+                min:"Debes ingresar mínimo 1 producto"
+            },
+            precio: {
+                required: "Debes ingresar el precio del producto",
+                number: "Debes ingresar solo números"
+            },
+            categoria: {
+                required: "Debes seleccionar una categoría"
+            },
+            direccion: {
+                minlength: "La descripción minímo debe tener 100 caracteres"
+            },
+            seleccionaArchivos: {
+                required: "Debes subir una imagen de tu producto",
+                url: "Ingresa una imagen con una url valida"
+            },
+        }
+    });   
     //********************************EFECTOS****************************************/
 
     $('.tm-date').datepicker({
@@ -122,5 +193,4 @@ $(document).ready(function () {
         autoclose: true
     })
     //******************************CALENDARIO**************************************/
-
 });
