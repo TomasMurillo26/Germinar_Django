@@ -1,5 +1,7 @@
+from random import choices
 from tkinter import CASCADE
 from django.db import models
+
 
 # Create your models here.
 class catProducto(models.Model):
@@ -23,27 +25,33 @@ class catSuscripcion(models.Model):
 class cliente(models.Model):
     idCliente = models.IntegerField(primary_key=True, verbose_name= 'Id cliente')
     nombreCliente = models.CharField(max_length=50, verbose_name= 'Nombre cliente' )
-    contrasenna = models.CharField(max_length=50, verbose_name='Contrasenna')
-    correoElect = models.CharField(max_length=70, verbose_name='Correo Electronico')
+    correoElect = models.EmailField(max_length=70, verbose_name='Correo Electronico')
     fechaNac = models.DateField(verbose_name='Fecha de nacimiento')
     suscripcion = models.ForeignKey(catSuscripcion, null=True, on_delete=models.CASCADE)
     ciudadCliente = models.CharField(max_length=50, verbose_name='Ciudad')
     regionCliente = models.CharField(max_length=50, verbose_name='Region')
-    direccion = models.CharField(max_length=200, verbose_name='Direccion cliente')
+    direccion = models.CharField(max_length=100, verbose_name='Direccion cliente')
     #categoria = models.foreignKey(Categoria, on_delete=models.CASCADE) Asi indicamos las llaves foraneas
     def __str__(self):
-        return self.nombreCliente, self.suscripcion
+        return self.nombreCliente
 
 class producto(models.Model):
+    PROD_OFERTA = (
+        ('Y', 'SI'),
+        ('N', 'NO')
+    )
+
     idProducto = models.IntegerField(primary_key=True, verbose_name= 'Id producto')
     nombreProducto = models.CharField(max_length=150, verbose_name= 'Nombre del producto')
     cantidad = models.PositiveIntegerField(verbose_name='Stock del producto')
+    precio = models.PositiveIntegerField(verbose_name='Precio del producto')
+    oferta = models.CharField(max_length=1,choices=PROD_OFERTA, default='N',verbose_name='Producto en oferta')
+    imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen') 
     categoria = models.ForeignKey(catProducto, on_delete=models.CASCADE)
-    descripcion = models.TextField(verbose_name='Descripcion producto')
-    vendedor = models.ForeignKey(cliente, on_delete=models.CASCADE)
+    descripcion = models.TextField(max_length=1000, verbose_name='Descripcion producto', null=True)
 
     def __str__(self):
-        return self.idProducto, self.nombreProducto
+        return self.nombreProducto
 
 
 class compra(models.Model):
@@ -54,16 +62,8 @@ class compra(models.Model):
     )
     idCompra = models.IntegerField(primary_key=True, verbose_name='Id compra')
     idCliente= models.ForeignKey(cliente, on_delete=models.CASCADE)
-    estadoCompra= models.CharField(max_length=2, choices=ESTADO_COMPRA)
+    estadoCompra= models.CharField(max_length=2, default='EE', choices=ESTADO_COMPRA, verbose_name='Estado de la compra')
     total= models.PositiveIntegerField(verbose_name='Total compra')
-
-    def descuento(self):
-        if self.idCliente == 'Germinar':
-            return "Tiene descuento"
-        else:
-            return "No tiene descuento"
-
-    descuentoCli= models.CharField(descuento, max_length=30)
 
     def __str__(self):
         return self.idCompra

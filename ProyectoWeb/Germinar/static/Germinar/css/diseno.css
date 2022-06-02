@@ -1193,6 +1193,49 @@ NAV
 }
 
 /*********************************************/
+.form-label-prod {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    padding-right: 1rem;
+    
+}
+
+.form-control-prod {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: solid 0.2px var(--gris);
+    border-radius: 10px;
+}
+
+@media (min-width: 390px) {
+    .form-control-prod {
+        width: 80%;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-control-prod {
+        width: 50%;
+        
+    }
+}
+
+@media (min-width: 1140px) {
+    .form-control-prod {
+        width: 100%;
+    }
+}
+
+.form-select-prod{
+    padding: 1rem;
+    font-size: 1.5rem;
+    border: solid 0.2px var(--gris);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 
 .form-label-usu {
     font-size: 1.5rem;
@@ -1200,6 +1243,7 @@ NAV
 }
 
 .form-control-usu {
+    font-size: 1.5rem;
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -1425,11 +1469,10 @@ NAV
             width: min(60rem, 100%);
         }
 
-        .form-control {
+        .form-control-u {
             padding: 5rem;
             width: min(60rem, 100%);
         }
-
 
 
         .input-group input[type="text"] {
@@ -2183,4 +2226,20 @@ NAV
 .lista{
     padding: 2rem;
     margin-left: 50%;
+}
+
+/*************************AGREGAR PRODUCTO***************************/
+
+.col-md-2 input{
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.btn-registrar{
+    text-align: center;
+    background-color: var(--verdeOscuro);
+}
+
+.btn-registrar button{
+    font-size: 2rem;
 }
