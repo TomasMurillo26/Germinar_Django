@@ -77,3 +77,7 @@ class detalleCompra(models.Model):
     def __str__(self):
         return self.total
 
+class datosCuenta(model.Model):
+    idUsuario = models.ForeignKey(compra, primary_key=True, on_delete=models.CASCADE)
+    correoElect = models.EmailField(max_length=70, verbose_name='Correo Electronico')
+    contraseña = models.CharField(max_length=50, verbose_name= 'contraseña' )

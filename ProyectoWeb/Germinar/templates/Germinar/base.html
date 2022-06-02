@@ -39,11 +39,12 @@
                         <div class="modal-body login_body">
                             <fieldset class="usuario_informacion">
                                     <div class="formulario">
+                                        <!--validar correo y contraseña-->
                                         <label >Correo</label>
-                                        <input type="email" placeholder="Escribir Correo">
+                                        <input for="{{form.correoElect.html_name}}" type="email" placeholder="Escribir Correo">
                                         <label>Contrase&ntilde;a</label>
-                                        <input type="text" placeholder="Escribir Contrase&ntilde;a">
-                                        <a href="#" class="">¿Eres nuevo?</a>
+                                        <input for="{{form.con}}"type="text" placeholder="Escribir Contrase&ntilde;a">
+                                        <a href="formulario" class="">¿Eres nuevo?</a>
                                     </div>
                                     <div class="botones">
                                         <div class="btn_iniciar">

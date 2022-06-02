@@ -193,4 +193,9 @@ $(document).ready(function () {
         autoclose: true
     })
     //******************************CALENDARIO**************************************/
+
+
+    $('.valUsuario').validate()({
+        
+    })
 });
