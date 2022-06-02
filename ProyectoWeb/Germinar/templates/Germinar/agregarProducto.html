@@ -59,12 +59,12 @@
                     <textarea type="text" class="form-control-prod" onchange="habilitarbtn()" minlength="10" 
                     maxlength="1000" name="{{form.descripcion.html_name}}" id="descripcion" placeholder="Maximo 1000 caracteres"></textarea>
                 </div>
-                <div class="col-md-12">
-                    <div class="col-md-2">
+                <div class="cuadro-imagen container-fluid">
+                    <div class="cuadro-file contenedor2">
                         <input class="imagen-producto" type="file" id="seleccionArchivos" accept="image/" required="required">
                     </div>
-                    <div class="col-md-8">
-                        <img id="imagenPrevisualizacion" alt="" width="100%">
+                    <div class="cuadro-view contenedor2 ">
+                        <img id="imagenPrevisualizacion" alt="">
                     </div>
                 </div>  
                 <div class="contenedor2">
@@ -72,16 +72,14 @@
                         <button type="submit" id="submitButton" class="btn-submit btn-primary-listo">Registrar nuevo producto</button>
                     </div>    
                 </div>
-
-                <div class="boton-volver contenedor2">
-                    <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">Volver</button>
-                </div>
-
                 <div class="alert alert-success" role="alert" hidden>
                     {{mensaje}}
                 </div>
             </form>
         </div>      
+    </div>
+    <div class="boton-volver contenedor2">
+        <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">Volver</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

@@ -1,6 +1,5 @@
 from django import forms
 from django.forms import ModelForm
-from jsonschema import ValidationError
 from .models import catProducto, catSuscripcion, cliente, producto, compra, detalleCompra
 from .validators import MaxSizeFileValidator
 
