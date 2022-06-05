@@ -45,13 +45,16 @@ class producto(models.Model):
         ('Y', 'SI'),
         ('N', 'NO')
     )
+    
+    class Mate:
+        unique_together = (('idProducto','categoria'),)
 
-    idProducto = models.IntegerField(primary_key=True, verbose_name= 'Id producto')
+    idProducto = models.CharField(max_length=150, primary_key=True, verbose_name= 'Id producto')
     nombreProducto = models.CharField(max_length=150, verbose_name= 'Nombre del producto')
     cantidad = models.PositiveIntegerField(verbose_name='Stock del producto')
     precio = models.PositiveIntegerField(verbose_name='Precio del producto')
     oferta = models.CharField(max_length=1,choices=PROD_OFERTA, default='N',verbose_name='Producto en oferta')
-    imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen') 
+    imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen')
     categoria = models.ForeignKey(catProducto, on_delete=models.CASCADE)
     descripcion = models.TextField(max_length=1000, verbose_name='Descripcion producto', null=True)
     precio = models.IntegerField(verbose_name= 'Precio del producto')
