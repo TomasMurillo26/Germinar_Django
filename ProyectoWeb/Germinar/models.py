@@ -35,6 +35,11 @@ class cliente(models.Model):
     def __str__(self):
         return self.nombreCliente
 
+class categoriaManager(models.Manager):
+
+    def get_by_title(self, categoria):
+        return self.filter(categoria__icontains=categoria)
+
 class producto(models.Model):
     PROD_OFERTA = (
         ('Y', 'SI'),
@@ -49,6 +54,8 @@ class producto(models.Model):
     imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen') 
     categoria = models.ForeignKey(catProducto, on_delete=models.CASCADE)
     descripcion = models.TextField(max_length=1000, verbose_name='Descripcion producto', null=True)
+
+    objects = categoriaManager()
 
     def __str__(self):
         return self.nombreProducto

@@ -2203,7 +2203,8 @@ input[type="number"]{-moz-appearance: textfield;}
             color: red;
             font-weight: bold;
             font-size: 1.5rem;
-            display: block;
+            display: flex;
+            flex-direction: row;
             margin-top: 5px;
         }
 
@@ -2286,4 +2287,93 @@ input[type="number"]{-moz-appearance: textfield;}
 
 .imagen-producto{
     position: relative;
+}
+
+.cantidad-precio{
+    display: flex;
+    flex-direction: row;
+}
+
+#precio{
+    margin-left: 10px;
+}
+
+.verde{
+    color: var(--verdeOscuro);
+    font-weight: bold;
+}
+
+.cat{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-submit[disabled]{
+    background-color: var(--gris);
+    color: var(--verdeOscuro);
+}
+
+/*********************Listado productos************************/
+.titulo-listado{
+    text-align: center;
+    padding: 3rem;
+    color:var(--blanco);
+    background-color: var(--verdeOscuro);
+}
+
+.titulo-listado h2{
+    font-size: 3rem;
+}
+
+.tabla-prod{
+    font-size: 2rem;
+}
+
+.buscador-filtros{
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+#form-buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+#form-filtro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-filtro{
+    background-color: var(--verdeOscuro);
+
+}
+
+.btn-submit-buscar{
+    font-size: 1.5rem;
+    padding: 1rem;
+    font-weight: bold;
+    background-color: var(--gris);
+    color: var(--negro);
+    border-radius: 10px;
+    border: none;
+    width: 30%;
+    position: relative;
+}
+
+.form-select-cat{
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    border: solid 0.2px var(--gris);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
 }

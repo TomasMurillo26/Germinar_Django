@@ -29,13 +29,22 @@ def carrito(request):
 
     return render(request, 'Germinar/carrito.html')
 
+
+
+
 def listaProductos(request):
 
-    productos= producto.objects.all()
+    productos= producto.objects.all().order_by('nombreProducto')
+    categorias= catProducto.objects.all()
+
+    #productos= producto.objects.filter(categoria='Plantas interior')
 
     contexto={
-        'productos':productos
+        'productos':productos,
+        'categorias':categorias
     }
+
+
 
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
@@ -64,7 +73,7 @@ def agregarProducto(request):
     }
 
     if request.method=='POST':
-        formulario= productoForm(request.POST, files=request.FILES)
+        formulario= productoForm(request.POST)
 
         if formulario.is_valid():
             formulario.save()
