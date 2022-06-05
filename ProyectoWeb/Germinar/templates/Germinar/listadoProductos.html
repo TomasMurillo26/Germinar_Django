@@ -23,30 +23,71 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
+<script>
+    $(document).ready(function filtrocat(){
+        $("#submitButtonF").on("click", function() {
+            var value = $("#categoria").val().toLowerCase();
+            $("#tabla-prod tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    </script>
 <body>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Nombre producto</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Vendedor</th>
-                <th scope="col">Descripci&oacute;n</th>
-            </tr>
-        </thead>
-            {% for prod in productos %}
-            <tr>
-                <td>{{prod.nombreProducto}}</td>
-                <td>{{prod.cantidad}}</td>
-                <td>{{prod.precio}}</td>
-                <td>{{prod.categoria}}</td>
-                <td>{{prod.vendedor}}</td>
-                <td>{{prod.descripcion}}</td>
-            </tr>
-            {% endfor %}
-        
-    </table>
+    <div class="contenedor3">
+        <div class="titulo-listado">
+            <h2>Listado de productos</h2>
+        </div>
+        <div class="buscador-filtros">
+            <form action="#" method="get" class="form-usuario contenedor2" name="form-buscador" id="form-buscador">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" minlength="5" maxlength="50" onkeyup="myFunction()" class="form-control-prod" 
+                    placeholder="Ingresar nombre del producto" name="{{form.nombreProducto.html_name}}" id="nombreProd">
+                </div>
+                <!--<div class="btn-registrar">
+                    <button style="margin-left: 10px;" type="submit" id="submitBuscar" class="btn-submit-buscar btn-primary-listo">Buscar</button>
+                </div>-->  
+            </form>
+            <form action="#" method="get" class="form-usuario contenedor2" name="form-filtro" id="form-filtro">
+                <div class="cat">
+                    <label for="{{form.categoria.id_for_label}}" class="form-label-prod verde" hidden></label>
+                    <select class="form-select-cat" name="{{form.categoria.html_name}}" id="categoria" aria-label="Default select example">
+                        <option selected>Todos los productos</option>
+                        {% for cat in categorias %}
+                            <option value="1">{{cat.nombreCategoria}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="btn-registrar">
+                    <button  style="margin-left: 10px;" type="submit" id="submitButtonF" class="btn-submit-buscar btn-primary-listo" onclick="filtrocat()"></button>>Filtrar</button>
+                </div>  
+            </form>
+        </div>
+        <table id="tabla-prod" class="table table-hover tabla-prod">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+                {% for prod in productos %}
+                <tr>
+                    <td>{{prod.nombreProducto}}</td>
+                    <td>{{prod.cantidad}}</td>
+                    <td>${{prod.precio}}</td>
+                    <td>{{prod.categoria}}</td>
+                    <td>Modificar</td>
+                    <td>Eliminar</td>
+                </tr>
+                {% endfor %}
+            
+        </table>
+    </div>
 </body>
 </html>
 {% endblock %}
