@@ -54,6 +54,7 @@ class producto(models.Model):
     imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen') 
     categoria = models.ForeignKey(catProducto, on_delete=models.CASCADE)
     descripcion = models.TextField(max_length=1000, verbose_name='Descripcion producto', null=True)
+    precio = models.IntegerField(verbose_name= 'Precio del producto')
 
     objects = categoriaManager()
 
