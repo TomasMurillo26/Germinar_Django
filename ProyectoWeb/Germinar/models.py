@@ -49,7 +49,7 @@ class producto(models.Model):
     class Mate:
         unique_together = (('idProducto','categoria'),)
 
-    idProducto = models.CharField(max_length=150, primary_key=True, verbose_name= 'Id producto')
+    idProducto = models.PositiveIntegerField(max_length=150, primary_key=True, verbose_name= 'Id producto')
     nombreProducto = models.CharField(max_length=150, verbose_name= 'Nombre del producto')
     cantidad = models.PositiveIntegerField(verbose_name='Stock del producto')
     precio = models.PositiveIntegerField(verbose_name='Precio del producto')
