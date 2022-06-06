@@ -46,8 +46,9 @@
             <div class="subt-pago">
                 <h2>Agregar producto</h2>
             </div>
-            <form action="" method="post" enctype="multipart/form-data" class="form-usuario contenedor2" name="form-producto" id="form-producto">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-usuario contenedor2" name="form-producto" id="form-producto">
                 {% csrf_token %}
+                {{ form.as_table }}
                 <div class="mb-3">
                     <label for="{{ forms.nombreProducto.id_for_label }}" class="form-label-prod verde">Nombre producto</label>
                     <input type="text" minlength="5" maxlength="50" class="form-control-prod" name="{{forms.nombreProducto.html_name}}" id="nombreProd" onchange="toggleButton()">
@@ -68,7 +69,7 @@
                     <select class="form-select-prod" name="{{forms.categoria.html_name}}" id="categoria" onchange="toggleButton()" aria-label="Default select example">
                         <option selected>Selecciona una categor&iacute;a</option>
                         {% for cat in categorias %}
-                            <option value="1">{{cat.nombreCategoria}}</option>
+                            <option >{{cat.nombreCategoria}}</option>
                         {% endfor %} 
                     </select>
                 </div>

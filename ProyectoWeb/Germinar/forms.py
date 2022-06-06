@@ -20,7 +20,7 @@ class clienteForm(ModelForm):
         ] 
 
 class productoForm(ModelForm):
-    nombreProducto = forms.CharField(label = 'Nombre del producto', widget = forms.TextInput(
+    nombreProducto = forms.CharField(label = 'Nombre de producto', widget = forms.TextInput(
         attrs= {
             'class': 'form-control-prod',
             'placeholder': 'Ingresar nombre del producto',
@@ -56,17 +56,19 @@ class productoForm(ModelForm):
         }
     ))
     
+    categoria = ['Plantas interior', 'Plantas exterior', 'Articulos Jardineria']
+
     categoria = forms.CharField(label='Categoria del producto', widget= forms.Select(
         attrs= {
-            'class': 'form-select-prod',
             'placeholder': 'Ingresar categoria',
             'id': 'categoria',
-            'required': 'required',
+            'required': 'required',  
         }
     ))
 
-    descripcion = forms.CharField(label='Descripcion', widget= forms.TextInput(
+    descripcion = forms.CharField(label='Descripcion', widget= forms.Textarea(
         attrs= {
+            'role': 'option',
             'class': 'form-control-prod',
             'placeholder': 'Ingresar descripcion',
             'id': 'descripcion',

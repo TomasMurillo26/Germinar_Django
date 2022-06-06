@@ -100,12 +100,15 @@
                     <td>{{prod.cantidad}}</td>
                     <td>${{prod.precio}}</td>
                     <td>{{prod.categoria}}</td>
-                    <td><a class="btn btn-warning" href="{% url 'actualizarProducto' prod.idProducto %}">Modificar</a></td>
-                    <td><a href="eliminarProducto/{{prod.idProducto}}" class="btn btn-danger" >Eliminar</a></td>
+                    <td><a class="btn btn-warning btn-lg" href="{% url 'actualizarProducto' prod.idProducto %}">Modificar</a></td>
+                    <td><a href="eliminarProducto/{{prod.idProducto}}" class="btn btn-danger btn-lg" >Eliminar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <div class="contenedor2">
+            <a style="text-decoration: none;" class="btn-submit btn-primary-listo" href="{% url 'agregarProducto' %}">Agregar Nuevo producto</a>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

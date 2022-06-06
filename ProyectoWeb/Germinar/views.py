@@ -3,7 +3,7 @@ from math import prod
 from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 import datetime
-from .models import producto
+from .models import producto, catProducto
 from .forms import clienteForm, productoForm, catProducto
 from django.urls import reverse
 
@@ -34,8 +34,10 @@ def carrito(request):
 
 def actualizarProducto(request, id ):
     Producto = producto.objects.get(idProducto=id)
+    categorias= catProducto.objects.all()
     context = {
-        'form': productoForm(instance=Producto)
+        'form': productoForm(instance=Producto),
+        'categorias': categorias,
     }
 
     if request.method=='POST':
@@ -82,7 +84,7 @@ def formulario(request):
 
     if request.method=='POST':
         formulario= clienteForm(request.POST)
-
+    
         if formulario.is_valid():
             formulario.save()
             datos['mensaje']="Guardado correctamente"
@@ -91,11 +93,9 @@ def formulario(request):
     return render(request, 'Germinar/formulario.html',datos)
 
 def agregarProducto(request):
-    categorias= catProducto.objects.all()
-
+    categorias= catProducto.__str__
     datos= {
-        'forms': productoForm(),
-        'categorias':categorias,  
+        'forms': productoForm(),  
     }
 
     if request.method=='POST':

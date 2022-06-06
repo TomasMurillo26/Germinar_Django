@@ -51,9 +51,6 @@
             <form action="#" method="POST" enctype="multipart/form-data" class="form-usuario contenedor2" name="form-producto" id="form-producto">
                 {% csrf_token %}
                 {{ form | crispy }}
-                
-
-
                 <div class="contenedor2">
                     <div class="btn-registrar">
                         <button type="submit" id="submitButton" class="btn-submit btn-primary-listo" >Registrar nuevo producto</button>
