@@ -138,7 +138,7 @@ h1 {
 .nav-bg {
     background-color: var(--verdeOscuro);
     position: relative;
-    z-index: 9999999999;
+    z-index: 999;
 }
 
 .nav-principal {
@@ -2329,11 +2329,14 @@ input[type="number"]{-moz-appearance: textfield;}
     font-size: 2rem;
 }
 
-.buscador-filtros{
-    padding: 2rem;
+.mb-3-flex{
     display: flex;
     flex-direction: row;
-    align-items: center;
+}
+
+.buscador-filtros{
+    padding: 2rem;
+    text-align: left;
     
 }
 

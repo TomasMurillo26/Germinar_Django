@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from email import message
+from math import prod
+from pyexpat.errors import messages
+from django.shortcuts import redirect, render
 import datetime
 from .models import producto
 from .forms import clienteForm, productoForm, catProducto
-
+from django.urls import reverse
 
 # Create your views here.
 
@@ -29,11 +32,36 @@ def carrito(request):
 
     return render(request, 'Germinar/carrito.html')
 
+def actualizarProducto(request, id ):
+    Producto = producto.objects.get(idProducto=id)
+    context = {
+        'form': productoForm(instance=Producto)
+    }
 
+    if request.method=='POST':
+        formulario= productoForm(data=request.POST,instance=Producto)
 
+        if formulario.is_valid:
+
+            formulario.save()
+
+            context['mensaje']="Modificado correctamente"
+    return render(request,'Germinar/actualizarProducto.html', context)
+    
+
+def eliminarProducto(request, id):
+    try:
+        Producto = producto.objects.get(idProducto=id)
+        Producto.delete()
+        return redirect(to='listadoProductos')
+    except:
+        print("No existe este producto")
+    
+    return render(request, 'Germinar/listadoProductos.html')
+
+    
 
 def listaProductos(request):
-
     productos= producto.objects.all().order_by('nombreProducto')
     categorias= catProducto.objects.all()
 
@@ -43,8 +71,6 @@ def listaProductos(request):
         'productos':productos,
         'categorias':categorias
     }
-
-
 
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
@@ -68,7 +94,7 @@ def agregarProducto(request):
     categorias= catProducto.objects.all()
 
     datos= {
-        'form': productoForm(),
+        'forms': productoForm(),
         'categorias':categorias,  
     }
 
@@ -78,7 +104,8 @@ def agregarProducto(request):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje']="Guardado correctamente"
-            formulario= productoForm()
+        else:
+            datos["forms"] = formulario
 
     return render(request, 'Germinar/agregarProducto.html',datos)
 
