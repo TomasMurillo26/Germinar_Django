@@ -138,7 +138,7 @@ h1 {
 .nav-bg {
     background-color: var(--verdeOscuro);
     position: relative;
-    z-index: 9999999999;
+    z-index: 999;
 }
 
 .nav-principal {
@@ -592,7 +592,7 @@ NAV
 
 .donaciones {
     margin-top: 50px;
-    background-image: "{% static 'Germinar/img/mets.jpg' %}";
+    background: url("/static/Germinar/img/mets.jpg");
     background-size: cover;
     background-position-x: center;
     justify-items: center;
@@ -2227,13 +2227,13 @@ input[type="number"]{-moz-appearance: textfield;}
         border-radius: 1rem;
         padding: 2rem;
         color: var(--gris);
-        background: url("/static/img/estrellas115.png");
+        background: url("/static/Germinar/img/kosmos-zvezdy-noch-mlechnyj-put-gorizont.jpg");
     }
 }
 
 @media (min-width: 1040px){
     .luna_parte1 {
-        background: url("/static/img/estrellas115.png");
+        background: url("/static/Germinar/img/kosmos-zvezdy-noch-mlechnyj-put-gorizont.jpg");
     }
 }
 
@@ -2329,11 +2329,14 @@ input[type="number"]{-moz-appearance: textfield;}
     font-size: 2rem;
 }
 
-.buscador-filtros{
-    padding: 2rem;
+.mb-3-flex{
     display: flex;
     flex-direction: row;
-    align-items: center;
+}
+
+.buscador-filtros{
+    padding: 2rem;
+    text-align: left;
     
 }
 

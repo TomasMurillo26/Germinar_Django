@@ -1,7 +1,8 @@
 from pickle import NONE
+from tkinter import Widget
 from django import forms
 from django.forms import ModelForm
-from .models import catProducto, catSuscripcion, categoriaManager, cliente, producto, compra, detalleCompra,categoriaManager
+from .models import catProducto, catSuscripcion, cliente, producto, compra, detalleCompra
 from .validators import MaxSizeFileValidator,ValidationError
 
 class clienteForm(ModelForm):
@@ -19,21 +20,62 @@ class clienteForm(ModelForm):
         ] 
 
 class productoForm(ModelForm):
-    nombreProducto = forms.CharField(max_length=150, required=True)
-    cantidad = forms.IntegerField(min_value=1, required=True)
-    precio = forms.IntegerField(min_value=1, required=True)
-    imagenProducto = forms.ImageField(validators=[MaxSizeFileValidator(max_file_size=5)] ) 
-    descripcion = forms.CharField(min_length=100, max_length=1000)
+    nombreProducto = forms.CharField(label = 'Nombre de producto', widget = forms.TextInput(
+        attrs= {
+            'class': 'form-control-prod',
+            'placeholder': 'Ingresar nombre del producto',
+            'id': 'nombreProducto',
+            'required': 'required',
+        }
+    ))
 
+    cantidad = forms.IntegerField(label='Cantidad', widget= forms.NumberInput(
+        attrs= {
+            'class': 'form-control-prod',
+            'placeholder': 'Ingresar la cantidad del producto',
+            'id': 'cantidad',
+            'required': 'required',
+        }
+    ))
 
-    def clean_nombreProd(self):
-        nombreProducto = self.cleaned_data["nombreProducto"]
-        existe = producto.objects.filter(nombreProducto_iexact=nombreProducto).exists()
-        
-        if existe:
-            raise ValidationError("Este producto ya existe")
+    precio = forms.IntegerField(label='Precio', widget= forms.NumberInput(
+        attrs= {
+            'class': 'form-control-prod',
+            'placeholder': 'Ingresar la cantidad del producto',
+            'id': 'precio',
+            'required': 'required',
+        }
+    ))
     
-        return nombreProducto
+    imagenProducto = forms.ImageField(label='Imagen del producto', widget= forms.FileInput(
+        attrs= {
+            'class': 'imagen-producto',
+            'placeholder': 'Ingresar imagen',
+            'id': 'imagenProducto',
+            'required': 'required',
+        }
+    ))
+    
+    categoria = ['Plantas interior', 'Plantas exterior', 'Articulos Jardineria']
+
+    categoria = forms.CharField(label='Categoria del producto', widget= forms.Select(
+        attrs= {
+            'placeholder': 'Ingresar categoria',
+            'id': 'categoria',
+            'required': 'required',  
+        }
+    ))
+
+    descripcion = forms.CharField(label='Descripcion', widget= forms.Textarea(
+        attrs= {
+            'role': 'option',
+            'class': 'form-control-prod',
+            'placeholder': 'Ingresar descripcion',
+            'id': 'descripcion',
+            'required': 'required',
+        }
+    ))
+    
 
     class Meta:
         model = producto
@@ -43,5 +85,6 @@ class productoForm(ModelForm):
             'precio',
             'imagenProducto',
             'categoria',
-            'descripcion',
+            'descripcion'
         ]
+
