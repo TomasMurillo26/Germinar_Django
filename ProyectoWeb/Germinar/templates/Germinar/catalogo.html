@@ -1,25 +1,19 @@
 {% extends "Germinar/base.html" %}
-{% block title %} catalogo {% endblock %}
 <!DOCTYPE html>
-{% block content %}
 {% load static %}
+{% block title %} catalogo {% endblock %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo</title>
-    <link type="text/css" rel="stylesheet" href ="{% static 'Germinar/css/diseno.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'Germinar/css/normalize.css' %}">
+
+    {% block links %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <script src="{% static 'Germinar/js/planta-interior.js' %}"></script>
-</head>
-<body style="background-image: linear-gradient(to bottom, #C7D0D8 30%, white 100%);">
+    {% endblock %}
+
+
+    {% block content %}
     <main class="grid-catalogo">
         <aside class="side-bar contenedor ">
             <div class="filtros contenedor-filtros">
@@ -77,6 +71,5 @@
             <div class="grid" id="productoCiclo"></div>
         </section>
     </main>
-</body>
+    {% endblock %}
 </html>
-{% endblock %}
