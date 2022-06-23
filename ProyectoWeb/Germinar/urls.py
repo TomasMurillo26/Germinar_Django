@@ -1,4 +1,7 @@
+from xml.etree.ElementInclude import include
 from django.urls import path
+
+from ProyectoWeb.lista_planta.views import lista_planta
 from .views import agregarProducto, eliminarProducto, principal, listaProductos, catalogo, formulario, seguimiento, base, planta, carrito, actualizarProducto
 
 urlpatterns = [
@@ -13,4 +16,5 @@ urlpatterns = [
     path('agregarProducto', agregarProducto, name='agregarProducto'),
     path('actualizarProducto/<int:id>', actualizarProducto, name='actualizarProducto'),
     path('eliminarProducto/<int:id>', eliminarProducto, name='eliminarProducto'),
+    path('api/' , include('lista_planta.urls'))
 ]

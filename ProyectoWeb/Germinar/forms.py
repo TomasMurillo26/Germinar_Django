@@ -17,7 +17,7 @@ class clienteForm(ModelForm):
             'ciudadCliente',
             'regionCliente',
             'direccion',
-        ] 
+        ]
 
 class productoForm(ModelForm):
     nombreProducto = forms.CharField(label = 'Nombre de producto', widget = forms.TextInput(
@@ -75,7 +75,6 @@ class productoForm(ModelForm):
             'required': 'required',
         }
     ))
-    
 
     class Meta:
         model = producto

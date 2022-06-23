@@ -47,7 +47,7 @@ class producto(models.Model):
     cantidad = models.PositiveIntegerField(verbose_name='Stock del producto')
     precio = models.PositiveIntegerField(verbose_name='Precio del producto')
     oferta = models.CharField(max_length=1,choices=PROD_OFERTA, default='N',verbose_name='Producto en oferta')
-    imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen') 
+    imagenProducto = models.ImageField(upload_to="images/", null=True, verbose_name='imagen')
     categoria = models.ForeignKey(catProducto, on_delete=models.CASCADE)
     descripcion = models.TextField(max_length=1000, verbose_name='Descripcion producto', null=True)
 
