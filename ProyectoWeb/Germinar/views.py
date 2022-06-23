@@ -1,10 +1,13 @@
 from pyexpat.errors import messages
+from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 import datetime
 from .models import producto, catProducto
 from .forms import clienteForm, productoForm, catProducto
 from django.urls import reverse
 from django.contrib import messages
+from django.core.paginator import Paginator
+from django.http import Http404
 
 # Create your views here.
 
@@ -46,7 +49,6 @@ def actualizarProducto(request, id ):
             return redirect(to="listaProductos")
         context['form']= formulario
     return render(request,'Germinar/actualizarProducto.html', context)
-    
 
 def eliminarProducto(request, id):
         Producto = get_object_or_404(producto,idProducto=id)
@@ -54,14 +56,18 @@ def eliminarProducto(request, id):
         return redirect(to='listaProductos')
 
 def listaProductos(request):
-    productos= producto.objects.all().order_by('nombreProducto')
-    categorias= catProducto.objects.all()
+    productos= producto.objects.all()
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(productos, 5)
+        productos = paginator.page(page)
+    except:
+        raise Http404
 
     contexto={
-        'productos':productos,
-        'categorias':categorias
+        'entity':productos,
+        'paginator': paginator
     }
- 
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
 def formulario(request):
@@ -95,7 +101,6 @@ def agregarProducto(request):
             datos["forms"] = formulario
 
     return render(request, 'Germinar/agregarProducto.html',datos)
-
 
 def planta(request):
 

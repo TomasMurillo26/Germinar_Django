@@ -2,6 +2,7 @@
 {% block title %} listadoProductos {% endblock %}
 <!DOCTYPE html>
 {% block content %}
+{% load humanize %}
 {% load static %}
 <html lang="en">
 <head>
@@ -114,13 +115,13 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            {% for prod in productos %}
+            {% for prod in entity %}
             <tbody id="tabla-prod">
                 <tr>
                     <td>{{prod.idProducto}}</td>
                     <td>{{prod.nombreProducto}}</td>
                     <td>{{prod.cantidad}}</td>
-                    <td>${{prod.precio}}</td>
+                    <td>${{prod.precio | intcomma }}</td>
                     <td>{{prod.categoria}}</td>
                     <td><a class="btn btn-warning btn-lg" href="{% url 'actualizarProducto' prod.idProducto %}">Modificar</a></td>
                     <td><a href="#" onclick="eliminarProd({{prod.idProducto}})" class="btn btn-danger btn-lg" >Eliminar</a></td>
@@ -128,6 +129,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div>
+            {% include 'Germinar/paginator.html' %}
+        </div>
         <div class="btn-registrar contenedor2">
             <a style="text-decoration: none;" class="btn-submit btn-primary-listo" href="{% url 'agregarProducto' %}">Agregar Nuevo producto</a>
         </div>
