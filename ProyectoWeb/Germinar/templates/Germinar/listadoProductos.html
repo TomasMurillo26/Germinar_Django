@@ -4,7 +4,6 @@
 {% block content %}
 {% load static %}
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +24,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
+{% block js %}
+<script>
+    function eliminarProd(idProducto) {
+        Swal.fire({
+            "title": "¿Eliminar producto?",
+            "width": "600",
+            "text": "Eliminará el producto del listado",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonColor": "#91a0a3",
+            "cancelButtonText": "Cancelar",
+            "confirmButtonColor": "#1f4550",
+            "padding": "2rem",
+            "confirmButtonText": "Confirmar"
+        })
+        .then(function (result) {
+            if (result.isConfirmed) {
+                window.location.href = "eliminarProducto/"+idProducto
+                }
+            })
+    }
+</script>
+{% endblock %}
 <script>
     $(document).ready(function () {
         $("#nombreProd").on("keyup", function () {
@@ -101,12 +123,12 @@
                     <td>${{prod.precio}}</td>
                     <td>{{prod.categoria}}</td>
                     <td><a class="btn btn-warning btn-lg" href="{% url 'actualizarProducto' prod.idProducto %}">Modificar</a></td>
-                    <td><a href="eliminarProducto/{{prod.idProducto}}" class="btn btn-danger btn-lg" >Eliminar</a></td>
+                    <td><a href="#" onclick="eliminarProd({{prod.idProducto}})" class="btn btn-danger btn-lg" >Eliminar</a></td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
-        <div class="contenedor2">
+        <div class="btn-registrar contenedor2">
             <a style="text-decoration: none;" class="btn-submit btn-primary-listo" href="{% url 'agregarProducto' %}">Agregar Nuevo producto</a>
         </div>
     </div>

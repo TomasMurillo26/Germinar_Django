@@ -140,7 +140,15 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% if messages %}
         {% for m in messages %}
-
+            <script>
+                Swal.fire({
+                    "title": "¡Listo!",
+                    "text": "{{m}}",
+                    "icon": "success",
+                    "confirmButtonColor": "#1f4550",
+                    "padding": "2rem"
+                })
+            </script>
         {% endfor %}
     {% endif%}
 </body>

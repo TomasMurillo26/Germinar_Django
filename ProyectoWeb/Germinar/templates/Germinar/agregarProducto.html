@@ -50,36 +50,13 @@
             <div class="subt-pago">
                 <h2>Agregar producto</h2>
             </div>
-            {% block js %}
-            <script>
-                function agregarProd() {
-                    Swal.fire({
-                        "title": "¡Listo!",
-                        "width": "600",
-                        "font-size": "2rem",
-                        "text": "{{m}}",
-                        "icon": "success",
-                        "showCancelButton": true,
-                        "cancelButtonColor": "#91a0a3",
-                        "cancelButtonText": "Seguir agregando productos",
-                        "confirmButtonColor": "#1f4550",
-                        "padding": "2rem",
-                        "confirmButtonText": "Volver al listado de productos"
-                    })
-                        .then(function (result) {
-                            if (result.isConfirmed) {
-                                window.location.href = "{% url 'listaProductos' %}"
-                            }
-                        })
-                }
-            </script>
-            {% endblock %}
+
             <form action="#" method="post" enctype="multipart/form-data" class="form-producto contenedor2"
                 name="form-producto" id="form-producto">
                 {% csrf_token %}
                 {{forms | crispy}}
                 <div class="btn-registrar contenedor2">
-                    <button type="submit" id="submitButton" onchange="toggleButton()" onclick="agregarProd()" class="btn-submit btn-primary-listo" 
+                    <button type="submit" id="submitButton" class="btn-submit btn-primary-listo" 
                         value="Enviar">Registrar Producto</button>
                 </div>
             </form>

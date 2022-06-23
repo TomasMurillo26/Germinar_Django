@@ -43,33 +43,25 @@ def actualizarProducto(request, id ):
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "Producto modificado correctamente")
+            return redirect(to="listaProductos")
         context['form']= formulario
     return render(request,'Germinar/actualizarProducto.html', context)
     
 
 def eliminarProducto(request, id):
-    try:
-        Producto = producto.objects.get(idProducto=id)
+        Producto = get_object_or_404(producto,idProducto=id)
         Producto.delete()
-        return redirect(to='listadoProductos')
-    except:
-        print("No existe este producto")
-    
-    return render(request, 'Germinar/listadoProductos.html')
-
-    
+        return redirect(to='listaProductos')
 
 def listaProductos(request):
     productos= producto.objects.all().order_by('nombreProducto')
     categorias= catProducto.objects.all()
 
-    #productos= producto.objects.filter(categoria='Plantas interior')
-
     contexto={
         'productos':productos,
         'categorias':categorias
     }
-
+ 
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
 def formulario(request):
@@ -96,9 +88,9 @@ def agregarProducto(request):
         formulario= productoForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            formulario = productoForm()
             messages.success(request, "Producto añadido correctamente")
             datos['mensaje']="Guardado correctamente"
+            return redirect(to='listaProductos')
         else:
             datos["forms"] = formulario
 
