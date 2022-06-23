@@ -1,8 +1,29 @@
 {% extends "Germinar/base.html" %}
+{% block js %}
+    <script>
+        function modProd(){
+            Swal.fire({
+                "title": "¡Listo!",
+                "width": "600",
+                "font-size": "2rem",
+                "text": "{{m}}",
+                "icon": "success",
+                "confirmButtonColor": "#1f4550",
+                "padding": "2rem",
+                "confirmButtonText": "Ok"
+            })
+            .then(function(result){
+                if(result.isConfirmed) {
+                    window.location.href= "{% url 'listaProductos' %}"
+                }
+            })
+        }
+    </script>
+{% endblock %}
 {% block title %} actualizarProducto {% endblock %}
 <!DOCTYPE html>
 {% block content %}
-{%  load crispy_forms_tags %}
+{% load crispy_forms_tags %}
 {% load static %} 
 <html lang="en">
 <head>
@@ -33,7 +54,7 @@
         var categoria = document.getElementById('categoria').value;
         var descripcion = document.getElementById('descripcion').value;
         var seleccionArchivos = document.getElementById('seleccionArchivos').value;
-
+        
         if (nombreProd && cantidad && categoria && precio && descripcion && seleccionArchivos) {
             document.getElementById('submitButton').disabled = false;
         } else {
@@ -47,16 +68,15 @@
             <div class="subt-pago">
                 <h2>Actualizar informaci&oacute;n del producto</h2>
             </div>
-            
-            <form action="#" method="POST" enctype="multipart/form-data" class="form-usuario contenedor2" name="form-producto" id="form-producto">
-                {% csrf_token %}
-                {{ form | crispy }}
-                <div class="contenedor2">
-                    <div class="btn-registrar">
-                        <button type="submit" id="submitButton" class="btn-submit btn-primary-listo" >Registrar nuevo producto</button>
-                    </div>    
-                </div>
-            </form>
+                <form action="#" method="POST" enctype="multipart/form-data" class="form-producto contenedor2" name="form-producto" id="form-producto">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="contenedor2">
+                        <div class="btn-registrar">
+                            <button type="submit" onclick="modProd()" id="submitButton" class="btn-submit btn-primary-listo" >Modificar producto</button>
+                        </div>    
+                    </div>
+                </form> 
         </div>      
     </div>
 </div>

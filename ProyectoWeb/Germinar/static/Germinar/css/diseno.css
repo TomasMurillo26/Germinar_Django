@@ -2294,9 +2294,7 @@ input[type="number"]{-moz-appearance: textfield;}
     flex-direction: row;
 }
 
-#precio{
-    margin-left: 10px;
-}
+
 
 .verde{
     color: var(--verdeOscuro);
@@ -2379,4 +2377,29 @@ input[type="number"]{-moz-appearance: textfield;}
     margin-bottom: 10px;
     margin-top: 10px;
     width: 100%;
+}
+
+.form-producto{
+    font-size: 2rem;
+    
+}
+
+.form-producto .form-group{
+    margin-bottom: 2rem;    
+}
+
+.form-producto .form-group .form-control-lg{
+    font-size: 2rem;
+    padding: .5rem;
+    margin-top: 5px;    
+}
+
+.form-producto .form-group .form-control{
+    font-size: 2rem;
+    padding: .5rem;
+    margin-top: 5px;     
+}
+
+.swal2-popup {
+    font-size: 1.6rem !important;
 }

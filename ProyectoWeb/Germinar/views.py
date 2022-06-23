@@ -1,11 +1,10 @@
-from email import message
-from math import prod
 from pyexpat.errors import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 import datetime
 from .models import producto, catProducto
 from .forms import clienteForm, productoForm, catProducto
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -33,21 +32,18 @@ def carrito(request):
     return render(request, 'Germinar/carrito.html')
 
 def actualizarProducto(request, id ):
-    Producto = producto.objects.get(idProducto=id)
-    categorias= catProducto.objects.all()
+    Producto = get_object_or_404(producto,idProducto=id)
+    form =  productoForm(instance=Producto)
     context = {
-        'form': productoForm(instance=Producto),
-        'categorias': categorias,
+        'form': form,
     }
 
     if request.method=='POST':
-        formulario= productoForm(data=request.POST,instance=Producto)
-
-        if formulario.is_valid:
-
+        formulario= productoForm(data=request.POST,files=request.FILES,instance=Producto)
+        if formulario.is_valid():
             formulario.save()
-
-            context['mensaje']="Modificado correctamente"
+            messages.success(request, "Producto modificado correctamente")
+        context['form']= formulario
     return render(request,'Germinar/actualizarProducto.html', context)
     
 
@@ -77,7 +73,6 @@ def listaProductos(request):
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
 def formulario(request):
-    
     datos= {
         'form': clienteForm()
     }
@@ -93,16 +88,16 @@ def formulario(request):
     return render(request, 'Germinar/formulario.html',datos)
 
 def agregarProducto(request):
-    categorias= catProducto.__str__
     datos= {
-        'forms': productoForm(),  
+        'forms': productoForm(),
     }
 
     if request.method=='POST':
-        formulario= productoForm(request.POST)
-
+        formulario= productoForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            formulario = productoForm()
+            messages.success(request, "Producto añadido correctamente")
             datos['mensaje']="Guardado correctamente"
         else:
             datos["forms"] = formulario

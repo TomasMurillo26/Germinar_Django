@@ -76,7 +76,6 @@
             <a href="{% url 'seguimiento' %}">Seguimiento en l&iacute;nea</a>
         </nav>
     </div> <!--NAVEGACION-->
-
     {% block content %} 
     {% endblock %}
 
@@ -138,5 +137,11 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
     <script src="{% static 'Germinar/js/script.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+        {% for m in messages %}
+
+        {% endfor %}
+    {% endif%}
 </body>
 </html>
