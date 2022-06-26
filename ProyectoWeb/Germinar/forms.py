@@ -3,9 +3,10 @@ from tkinter import Widget
 from django import forms
 from django.forms import ModelForm
 from .models import producto
-from .validators import MaxSizeFileValidator,ValidationError
+from .validators import MaxSizeFileValidator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ValidationError
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -14,6 +15,16 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class productoForm(ModelForm):
+
+    def clean_nombre(self):
+        nombre = self.cleaned_data["nombre"]
+        existe = producto.objects.filter(nombreProducto__iexact=nombre).exists()
+
+        if existe:
+            raise ValidationError("Este nombre ya existe")
+        
+        return nombre
+
     nombreProducto = forms.CharField(label = 'Nombre del producto', widget = forms.TextInput(
         attrs= {
             'class': 'form-control-lg',
@@ -74,13 +85,15 @@ class productoForm(ModelForm):
 
             self.fields['categoria'].widget.attrs.update({
                 'class': 'form-control',
-                'placeholder': 'Seleccionar categoría'
+                'placeholder': 'Seleccionar categoría',
+                'required': 'required'
             })
         
             self.fields['imagenProducto'].widget.attrs.update({
                 'class': 'form-control',
                 'type': 'file',
-                'label': 'Imagen del producto'
+                'label': 'Imagen del producto',
+                'validators': [MaxSizeFileValidator(max_file_size=2)]
                 
             })
             

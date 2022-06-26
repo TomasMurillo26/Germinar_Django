@@ -1,5 +1,4 @@
 from pyexpat.errors import messages
-import re
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 import datetime
@@ -11,6 +10,7 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
+
 
 # Create your views here.
 
