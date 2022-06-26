@@ -2,8 +2,8 @@ from pyexpat.errors import messages
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 import datetime
-from .models import producto, catProducto
-from .forms import clienteForm, productoForm, catProducto
+from .models import producto
+from .forms import productoForm
 from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -27,8 +27,11 @@ def principal(request):
     return render(request, 'Germinar/principal.html',ctx)
 
 def catalogo(request):
-
-    return render(request, 'Germinar/catalogo.html')
+    productos = producto.objects.all()
+    datos = {
+        'productos': productos
+    }
+    return render(request, 'Germinar/catalogo.html',datos)
 
 def carrito(request):
 
@@ -70,20 +73,6 @@ def listaProductos(request):
     }
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
-def formulario(request):
-    datos= {
-        'form': clienteForm()
-    }
-
-    if request.method=='POST':
-        formulario= clienteForm(request.POST)
-    
-        if formulario.is_valid():
-            formulario.save()
-            datos['mensaje']="Guardado correctamente"
-            formulario= clienteForm()
-
-    return render(request, 'Germinar/formulario.html',datos)
 
 def agregarProducto(request):
     datos= {

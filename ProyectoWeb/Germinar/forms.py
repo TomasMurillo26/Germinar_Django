@@ -2,22 +2,10 @@ from pickle import NONE
 from tkinter import Widget
 from django import forms
 from django.forms import ModelForm
-from .models import catProducto, catSuscripcion, cliente, producto, compra, detalleCompra
+from .models import producto
 from .validators import MaxSizeFileValidator,ValidationError
 
-class clienteForm(ModelForm):
 
-    class Meta:
-        model = cliente
-
-        fields = [
-            'nombreCliente',
-            'correoElect',
-            'fechaNac',
-            'ciudadCliente',
-            'regionCliente',
-            'direccion',
-        ] 
 
 class productoForm(ModelForm):
     nombreProducto = forms.CharField(label = 'Nombre del producto', widget = forms.TextInput(

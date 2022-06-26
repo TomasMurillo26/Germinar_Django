@@ -797,7 +797,6 @@ NAV
 @media (min-width: 768px) {
     .grid-catalogo {
         display: grid;
-        grid-template-rows: 20% 80%;
     }
 }
 
@@ -812,6 +811,7 @@ NAV
 .side-bar {
     width: 100%;
 }
+
 
 .filtros h3 {
     font-size: 2rem;
@@ -864,12 +864,25 @@ NAV
     width: 50%;
 }
 
+.grid-catalogo2{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    padding: 2rem;
+}
+
 .producto {
+    padding: 5rem;
+}
+
+.prod{
+    padding: 2rem;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
     background-color: var(--blanco);
-    padding: 1rem;
     box-shadow: 0px 10px 5px 0px rgba(171, 171, 171, 0.55);
+    flex-wrap: wrap;
 }
 
 .producto img {
@@ -879,6 +892,7 @@ NAV
 }
 
 .producto__imagen {
+    width: min(20rem,100%);
     background-size: cover;
     background-image: url();
     border: solid 0.5px var(--gris);
@@ -2373,9 +2387,8 @@ input[type="number"]{-moz-appearance: textfield;}
 
 #form-filtro{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: left;
 }
 
 .btn-filtro{
@@ -2433,4 +2446,59 @@ input[type="number"]{-moz-appearance: textfield;}
 .d-flex .pagination{
     font-size: 2rem;
     
+}
+
+#div_id_username{
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#div_id_username input{
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+#div_id_password{
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
+#div_id_password input{
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.container{
+    align-content: center;
+    padding: 6rem;
+}
+
+.card2{
+    padding: 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.btn-login{
+    font-size: 2rem;
+    color: var(--blanco);
+    background-color: var(--verdeOscuro);
+    font-weight: bold;
+    padding: 2rem;
+    border-radius: 10px;
+    border:none
 }

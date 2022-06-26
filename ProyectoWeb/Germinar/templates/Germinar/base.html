@@ -20,44 +20,36 @@
                 <img class="logo-germinar" href="{% url 'principal' %}" src="{% static 'Germinar/img/2022-03-31_10-45-38.png' %}" alt="logo">
             </div>
             <div class="nav-encabezado">
-                <!-- Button trigger modal -->
-                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="modal" id="show-modal">Iniciar Sesi&oacute;n
-                    <span>
+                {% if user.is_authenticated %}
+                <a href="#"> {{user.username}} 
+                    <span> 
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <circle cx="12" cy="7" r="4" />
                             <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                         </svg>
+                    </span>   
+                </a>
+                <a type="button" href="{% url 'logout' %}">Cerrar sesi&oacute;n
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                        </svg>
                     </span>
                 </a>
-                <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header usuario_encabezado">
-                        <button style="color: white;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body login_body">
-                            <fieldset class="usuario_informacion">
-                                    <div class="formulario">
-                                        <label >Correo</label>
-                                        <input type="email" placeholder="Escribir Correo">
-                                        <label>Contrase&ntilde;a</label>
-                                        <input type="password" placeholder="Escribir Contrase&ntilde;a">
-                                        <a href="#" class="">¿Eres nuevo?</a>
-                                    </div>
-                                    <div class="botones">
-                                        <div class="btn_iniciar">
-                                            <button type="button" class="btn btn-outline-success">Iniciar sesion</button>
-                                        </div>
-                                    </div>
-                            </fieldset>
-                            <div class="logo_sesion">
-                                <img src="{% static 'Germinar/img/2022-03-31_10-45-38.png' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                {% else %}
+                <a type="button" href="{% url 'login' %}">Iniciar sesi&oacute;n
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M20 12h-13l3 -3m0 6l-3 -3" />
+                        </svg>
+                    </span>
+                </a>
+                {% endif %}
                 <a href="{% url 'carrito' %}">Mi carrito <span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F4550" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <circle cx="6" cy="19" r="2" />
@@ -83,7 +75,7 @@
         <main class="encabezado_sus">
             <fieldset class="mail-suscribirse">
                 <h2>Suscr&iacute;bete para más informaci&oacute;n</h2>
-                <form action="#" id="form-sus" class="form">
+                <form action="" method="POST"  id="form-sus" class="form">
                     <input type="email" class="form-control-usu" minlength="10" maxlength="20" name="email" id="email"
                         placeholder="Ingresar correo electr&oacute;nico">
                     <div id="emailHelp" class="form-text"></div>
