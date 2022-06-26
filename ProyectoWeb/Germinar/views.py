@@ -1,13 +1,16 @@
 from pyexpat.errors import messages
+import re
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 import datetime
 from .models import producto
-from .forms import productoForm
+from .forms import productoForm, CustomUserCreationForm
 from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
@@ -37,6 +40,7 @@ def carrito(request):
 
     return render(request, 'Germinar/carrito.html')
 
+@permission_required('Germinar.change_producto')
 def actualizarProducto(request, id ):
     Producto = get_object_or_404(producto,idProducto=id)
     form =  productoForm(instance=Producto)
@@ -53,11 +57,13 @@ def actualizarProducto(request, id ):
         context['form']= formulario
     return render(request,'Germinar/actualizarProducto.html', context)
 
+@permission_required('Germinar.delete_producto')
 def eliminarProducto(request, id):
         Producto = get_object_or_404(producto,idProducto=id)
         Producto.delete()
         return redirect(to='listaProductos')
 
+@permission_required('Germinar.view_producto')
 def listaProductos(request):
     productos= producto.objects.all()
     page = request.GET.get('page', 1)
@@ -73,7 +79,7 @@ def listaProductos(request):
     }
     return render(request, 'Germinar/listadoProductos.html',contexto)
 
-
+@permission_required('Germinar.add_producto')
 def agregarProducto(request):
     datos= {
         'forms': productoForm(),
@@ -102,4 +108,20 @@ def seguimiento(request):
 def base(request):
 
     return render(request, 'Germinar/base.html')
+
+def formulario(request):
+    datos = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request,user)
+            messages.success(request, "Te has registrado correctamente")
+            return redirect(to="principal")
+        datos["form"] = formulario
+    return render(request, 'registration/formulario.html',datos)
 

@@ -115,13 +115,23 @@
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
+            {% if user.is_authenticated %}
             <div class="carousel-item active">
-                <a href="#"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel1.jpg' %}" class="d-block w-100" alt="..."></a>
+                <a href="{% url 'formulario' %}"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel1.jpg' %}" class="d-block w-100" alt="..."></a>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Bienvenido {{nombre_usuario}} {{apellido_usuario}}</h5>
+                    <h5>Bienvenido {{user.username}}</h5>
+                    <p>Ve nuestro cat&aacute;logo de productos</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="carousel-item active">
+                <a href="{% url 'formulario' %}"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel1.jpg' %}" class="d-block w-100" alt="..."></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Bienvenido</h5>
                     <p>Registrate y s&eacute; parte de nuestra comunidad</p>
                 </div>
             </div>
+            {% endif %}
             <div class="carousel-item">
                 <a href="#donaciones"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel2.jpg' %}"class="d-block w-100" alt="..."></a>
                 <div class="carousel-caption d-none d-md-block">

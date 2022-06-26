@@ -2457,7 +2457,10 @@ input[type="number"]{-moz-appearance: textfield;}
 }
 
 #div_id_username input{
-    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+#hint_id_username{
     font-size: 1.5rem;
 }
 
@@ -2466,12 +2469,79 @@ input[type="number"]{-moz-appearance: textfield;}
     font-size: 2rem;
     text-align: left;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 
 #div_id_password input{
+    font-size: 1.5rem;
+}
+
+#div_id_first_name{
     padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#div_id_first_name input{
+    font-size: 1.5rem;
+}
+
+#div_id_last_name{
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#div_id_last_name input{
+    font-size: 1.5rem;
+}
+
+#div_id_email{
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#div_id_email input{
+    font-size: 1.5rem;
+}
+
+#div_id_password1{
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#div_id_password1 input{
+    font-size: 1.5rem;
+}
+
+#hint_id_password1{
+    font-size: 1.5rem;
+}
+
+#div_id_password2{
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#div_id_password2 input{
+    font-size: 1.5rem;
+}
+
+#hint_id_password2{
     font-size: 1.5rem;
 }
 
@@ -2491,6 +2561,8 @@ input[type="number"]{-moz-appearance: textfield;}
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 0.25rem;
+    box-shadow: 0px 10px 5px 0px rgba(74, 73, 73, 0.55);
+    
 }
 
 .btn-login{
@@ -2501,4 +2573,16 @@ input[type="number"]{-moz-appearance: textfield;}
     padding: 2rem;
     border-radius: 10px;
     border:none
+}
+
+.registrate{
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--gris);
+    text-decoration: none;
+}
+
+.registrate :hover{
+    color: var(--verdeOscuro);
 }

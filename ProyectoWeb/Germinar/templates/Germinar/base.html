@@ -66,6 +66,12 @@
             <a href="{% url 'principal' %}">Inicio</a>
             <a href="{% url 'catalogo' %}">Tienda Online</a>
             <a href="{% url 'seguimiento' %}">Seguimiento en l&iacute;nea</a>
+            {% if perms.Germinar.add_producto %}
+                <a href="{% url 'agregarProducto' %}">Agregar Producto</a>
+            {% endif %}
+            {% if perms.Germinar.view_producto %}
+                <a href="{% url 'listaProductos' %}">Listado de productos</a>
+            {% endif %}
         </nav>
     </div> <!--NAVEGACION-->
     {% block content %} 
