@@ -10,7 +10,9 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
-
+from django.conf import settings
+import json
+import urllib
 
 # Create your views here.
 
@@ -117,10 +119,25 @@ def formulario(request):
     if request.method == 'POST':
         formulario = CustomUserCreationForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
-            login(request,user)
-            messages.success(request, "Te has registrado correctamente")
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+
+            if result['success']:
+                formulario.save()
+                user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+                login(request,user)
+                messages.success(request, "Te has registrado correctamente")
+            else:
+                messages.error(request, 'reCaptcha Invalido. Intenta nuevamente')
+
             return redirect(to="principal")
         datos["form"] = formulario
     return render(request, 'registration/formulario.html',datos)

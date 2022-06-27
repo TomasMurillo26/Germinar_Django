@@ -1,7 +1,7 @@
 from pickle import NONE
 from tkinter import Widget
 from django import forms
-from django.forms import ModelForm
+from django.forms import EmailInput, ModelForm
 from .models import producto
 from .validators import MaxSizeFileValidator
 from django.contrib.auth.forms import UserCreationForm
@@ -9,6 +9,16 @@ from django.contrib.auth.models import User
 from django.forms import ValidationError
 
 class CustomUserCreationForm(UserCreationForm):
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        existe = User.objects.filter(email__iexact=email).exists()
+        if existe:
+            raise forms.ValidationError(u'Este correo ya está registrado, intenta ingresando otro')
+        return email
+
+    
+
     class Meta:
         model = User
         fields = ['username','first_name','last_name','email','password1','password2']
