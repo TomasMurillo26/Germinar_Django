@@ -24,6 +24,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
+<script>
+    function addProd(idProducto) {
+        Swal.fire({
+            "title": "Producto agregado",
+            "width": "600",
+            "text": "Producto agregado exitosamente",
+            "icon": "success",
+            "confirmButtonColor": "#1f4550",
+            "padding": "2rem",
+            "confirmButtonText": "Confirmar"
+        })
+        .then(function (result) {
+            if (result.isConfirmed) {
+                window.location.href = "{% url 'carro:agregar' productos.idProducto %}"
+                }
+            })
+    }
+</script>
 <body style="background-color: #C7D0D8;">
     <div class="contenedor2">
         <main class="plantas_cuadro contenedor3">
@@ -44,14 +62,14 @@
                 </p>
                 <div class="boton" style="text-align: left;">
                 <div class="boton">
-                    <input type="number" placeholder="Cantidad" min="0">
-                    <a href="{% url 'carro:agregar' productos.idProducto %}" class="btn btn-secondary btn-sm ">Agregar al carrito</a>
+                    <input type="number" placeholder="Cantidad" min="0"></input>
+                    <a onclick="addProd({{productos.idProducto}})" class="btn-login ">Agregar al carrito</a>
                 </div>
             </div>
         </main>
     </div>
     <div class="boton-volver contenedor2">
-        <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">Volver</button>
+        <a type="button" href="{% url 'catalogo'%}" class="btn-login">Volver</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

@@ -16,15 +16,15 @@ def eliminar_producto(request, idProducto):
     carro = Carro(request)
     Producto = producto.objects.get(idProducto=idProducto)
     carro.eliminar(producto=Producto)
-    return redirect("carrito")
+    return redirect(to='carrito')
 
 def restar_producto(request, idProducto):
     carro = Carro(request)
     Producto = producto.objects.get(idProducto=idProducto)
     carro.restar_producto(producto=Producto)
-    return redirect("carrito")
+    return redirect(to='carrito')
 
 def limpiar_carro(request):
     carro = Carro(request)
     carro.limpiar_carro()
-    return redirect("catalogo")
+    return redirect('catalogo')
