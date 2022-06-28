@@ -805,6 +805,7 @@ NAV
     .grid-catalogo {
         display: grid;
         grid-template-columns: 20% 80%;
+        margin-top: 1rem;
     }
 }
 
@@ -2380,3 +2381,27 @@ input[type="number"]{-moz-appearance: textfield;}
     margin-top: 10px;
     width: 100%;
 }
+
+.parte1{
+    width: 300px;
+    height: 350px;
+    margin: 10px;
+}
+
+.imag_planta1{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 350px;
+    margin: 10px;
+}
+
+.imag_planta1 img{
+    height: auto;
+    width: auto;
+    max-width: 100px;
+    max-height: 100px;
+}
+grid-catalogo

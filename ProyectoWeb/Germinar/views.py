@@ -25,8 +25,12 @@ def principal(request):
     return render(request, 'Germinar/principal.html',ctx)
 
 def catalogo(request):
-
-    return render(request, 'Germinar/catalogo.html')
+    productos = producto.objects.all()
+    
+    data = {
+        'productos': productos
+    }
+    return render(request, 'Germinar/catalogo.html', data)
 
 def carrito(request):
 
@@ -95,7 +99,7 @@ def formulario(request):
 def agregarProducto(request):
     categorias= catProducto.__str__
     datos= {
-        'forms': productoForm(),  
+        'forms': productoForm(),
     }
 
     if request.method=='POST':

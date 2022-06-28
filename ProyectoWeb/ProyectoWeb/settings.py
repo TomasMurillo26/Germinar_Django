@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'Germinar',
     'lista_planta',
     'rest_framework.authtoken',
+    'django.contrib.humanize',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-X_FRAME_OPTIONS= 'SAMEORIGIN'
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
