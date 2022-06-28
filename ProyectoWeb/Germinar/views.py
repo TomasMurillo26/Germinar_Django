@@ -35,6 +35,7 @@ def catalogo(request):
     }
     return render(request, 'Germinar/catalogo.html',datos)
 
+@login_required(login_url='/accounts/login/')
 def carrito(request):
 
     return render(request, 'Germinar/carrito.html')

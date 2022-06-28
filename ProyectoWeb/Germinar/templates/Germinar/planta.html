@@ -24,23 +24,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
-<script>
-    function addProd(idProducto) {
-        Swal.fire({
-            "title": "Producto agregado",
-            "width": "600",
-            "icon": "success",
-            "confirmButtonColor": "#1f4550",
-            "padding": "2rem",
-            "confirmButtonText": "Confirmar"
-        })
-        .then(function (result) {
-            if (result.isConfirmed) {
-                window.location.href = "{% url 'carro:agregar' productos.idProducto %}"
-                }
-            })
-    }
-</script>
+
 <body style="background-color: #C7D0D8;">
     <div class="contenedor2">
         <main class="plantas_cuadro contenedor3">
@@ -61,8 +45,7 @@
                 </p>
                 <div class="boton" style="text-align: left;">
                 <div class="boton">
-                    <input type="number" placeholder="Cantidad" min="0"></input>
-                    <a onclick="addProd({{productos.idProducto}})" class="btn-login ">Agregar al carrito</a>
+                    <a href = "{% url 'carro:agregar' productos.idProducto %}" class="btn-login ">Agregar al carrito</a>
                 </div>
             </div>
         </main>

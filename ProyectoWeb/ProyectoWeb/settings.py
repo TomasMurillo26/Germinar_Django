@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_germinar',
     'carro',
     'colorfield',
+    'pedidos',
     'rest_framework.authtoken'
 ]
 

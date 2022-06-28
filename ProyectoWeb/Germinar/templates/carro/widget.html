@@ -20,7 +20,7 @@
                     <td>{{value.nombreProducto}}</td>
                     <td style="text-align:center;">{{value.cantidad}}</td>
                     <td>${{value.precio | intcomma}}</td>
-                    <td class="flex-boton"><a href="{% url 'carro:agregar' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-sm btn-success">+</a>
+                    <td class="flex-boton"><a href="{% url 'carro:add' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-sm btn-success">+</a>
                         <a href="{% url 'carro:restar' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-danger btn-lg" >-</a>
                     </td>
                 </tr>
@@ -41,7 +41,16 @@
 <br>
 <br>
 {% if user.is_authenticated %}
-    <h2>Total: ${{total_carro | intcomma}}</h2>
+    {% if request.session.carro.items %}
+        <div class="carrito-sub">
+            <h2>Total: ${{total_carro | intcomma}}</h2>
+            <a class="btn-login" href="{% url 'formulario' %}">Comprar</a>
+        </div>
+    {% else %}
+    <div class="carrito-sub">
+        <h2>Total: ${{total_carro | intcomma}}</h2>
+    </div>
+    {% endif %}
 {% else %}
     <div class="carrito-sub">
         <h2>Inicia sesión para continuar con tu compra</h2>

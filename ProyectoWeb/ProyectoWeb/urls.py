@@ -23,7 +23,8 @@ urlpatterns = [
     path('', include('Germinar.urls')),
     path('api/', include('rest_germinar.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('carro/', include('carro.urls'))
+    path('carro/', include('carro.urls')),
+    path('pedidos/', include('pedidos.urls'))
 ]
 
 if settings.DEBUG:
