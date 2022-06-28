@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Germinar.urls')),
     path('api/', include('rest_germinar.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('carro/', include('carro.urls'))
 ]
 
 if settings.DEBUG:

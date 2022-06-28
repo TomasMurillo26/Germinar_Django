@@ -99,9 +99,12 @@ def agregarProducto(request):
 
     return render(request, 'Germinar/agregarProducto.html',datos)
 
-def planta(request):
-
-    return render(request, 'Germinar/planta.html')
+def planta(request,id):
+    Producto = get_object_or_404(producto,idProducto=id)
+    context = {
+        'productos': Producto,
+    }
+    return render(request, 'Germinar/planta.html',context)
 
 def seguimiento(request):
 

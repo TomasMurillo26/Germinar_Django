@@ -1,0 +1,44 @@
+{% load humanize %}
+<br>
+<br>
+<br>
+<table class="table table-hover tabla-prod">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody id="tabla-prod">
+        {% if request.session.carro.items %}
+            {% for key, value in request.session.carro.items %}
+                <tr>
+                    <td>{{value.idProducto}}</td>
+                    <td>{{value.nombreProducto}}</td>
+                    <td>{{value.cantidad}}</td>
+                    <td>${{value.precio}}</td>
+                    <td><a href="{% url 'carro:agregar' value.idProducto %}" class="btn btn-sm btn-success">+</a>
+                        <a href="{% url 'carro:restar' value.idProducto %}" class="btn btn-danger btn-lg" >-</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6">
+                    <br>
+                    <div class="alert alert-danger text-center">
+                        Sin productos
+                    </div>
+                    <br>
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+<br>
+<br>
+<h2>Total: ${{total_carro | intcomma}}</h2>
+<br>

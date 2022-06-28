@@ -89,6 +89,7 @@
                             <p class="producto__nombre">{{p.nombreProducto}}</p>
                             <p class="producto__precio">${{p.precio | intcomma}}</p>
                         </div>
+                        <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
                     </div>
                 </div>
                 {% endfor %}
