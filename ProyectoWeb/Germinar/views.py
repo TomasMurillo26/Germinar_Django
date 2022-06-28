@@ -2,6 +2,7 @@ from pyexpat.errors import messages
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 import datetime
+from carro.carro import Carro
 from .models import producto
 from .forms import productoForm, CustomUserCreationForm
 from django.urls import reverse
@@ -24,12 +25,8 @@ class Persona(object):
         super().__init__()
 
 def principal(request):
-
-    usuario=Persona("Tomas","Murillo")
-    hora= datetime.datetime.now()
-    ctx= {"nombre_usuario":usuario.nombre, "apellido_usuario":usuario.apellido, "hora_actual": hora}
-
-    return render(request, 'Germinar/principal.html',ctx)
+    carro=Carro(request)
+    return render(request, 'Germinar/principal.html')
 
 def catalogo(request):
     productos = producto.objects.all()

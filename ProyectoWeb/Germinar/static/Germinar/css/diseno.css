@@ -2661,6 +2661,26 @@ input[type="number"] {
     text-decoration: none;
 }
 
+.m-0 li{
+    font-size: 1.5rem;
+}
+
+.flex-boton{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.carrito-sub{
+    align-items: center;
+    text-align: center;
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
 .btn-login a:hover{
     text-align: center;
     font-size: 2rem;

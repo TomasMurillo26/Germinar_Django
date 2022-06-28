@@ -7,7 +7,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Nombre producto</th>
-            <th scope="col">Cantidad</th>
+            <th scope="col" style="text-align: center;">Cantidad</th>
             <th scope="col">Precio</th>
             <th scope="col"></th>
         </tr>
@@ -18,10 +18,10 @@
                 <tr>
                     <td>{{value.idProducto}}</td>
                     <td>{{value.nombreProducto}}</td>
-                    <td>{{value.cantidad}}</td>
-                    <td>${{value.precio}}</td>
-                    <td><a href="{% url 'carro:agregar' value.idProducto %}" class="btn btn-sm btn-success">+</a>
-                        <a href="{% url 'carro:restar' value.idProducto %}" class="btn btn-danger btn-lg" >-</a>
+                    <td style="text-align:center;">{{value.cantidad}}</td>
+                    <td>${{value.precio | intcomma}}</td>
+                    <td class="flex-boton"><a href="{% url 'carro:agregar' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-sm btn-success">+</a>
+                        <a href="{% url 'carro:restar' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-danger btn-lg" >-</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -40,5 +40,12 @@
 </table>
 <br>
 <br>
-<h2>Total: ${{total_carro | intcomma}}</h2>
+{% if user.is_authenticated %}
+    <h2>Total: ${{total_carro | intcomma}}</h2>
+{% else %}
+    <div class="carrito-sub">
+        <h2>Inicia sesión para continuar con tu compra</h2>
+        <a class="btn-login" href="{% url 'formulario' %}">Registrate aquí</a>
+    </div>
+{% endif %}
 <br>
