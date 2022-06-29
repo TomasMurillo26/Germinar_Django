@@ -79,7 +79,7 @@
             </div>
             <div class="catalogo">
                 {% for p in productos %}
-                    {% if p.categoria == 'Plantas_interior'%}
+                    {% if p.categoria == 'plantasexterior'%}
                     <div class="catalogo">
                         <div class="producto imag_planta1" type="submit" id="enviar" value="Ver producto">
                             <form action="{% url 'planta' %}" id="formPlanta">
@@ -99,9 +99,8 @@
                         </div>
                     </div>
                     {% else %}
-                    <p class="">{{ p.nombreProducto}}</p>
+                    <p class="">{{ p.categoria}} es {{ p.nombreProducto}}</p>
                     {% endif %}
-                    <p class="producto__precio">{{ p.categoria}}</p>
                 {% endfor %}
             </div>
         </section>
