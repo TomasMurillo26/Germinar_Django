@@ -2475,25 +2475,18 @@ input[type="number"] {
 .buscador-filtros {
     padding: 2rem;
     text-align: left;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 }
 
 #form-buscador {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 }
 
 #form-filtro {
     display: flex;
-<<<<<<< HEAD
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -2510,13 +2503,11 @@ input[type="number"] {
 */
 
 .btn-filtro{
-=======
     flex-direction: column;
     align-items: left;
 }
 
 .btn-filtro {
->>>>>>> main
     background-color: var(--verdeOscuro);
 
 }
@@ -2543,7 +2534,6 @@ input[type="number"] {
     width: 100%;
 }
 
-<<<<<<< HEAD
 /*-----------------------------------------------------------------------------------------*/
 
 /*
@@ -2567,7 +2557,6 @@ input[type="number"] {
     flex-wrap: wrap;
 }
 */
-=======
 .form-producto {
     font-size: 2rem;
 
@@ -2804,4 +2793,3 @@ input[type="number"] {
         text-align: left;
     }
 }
->>>>>>> main
