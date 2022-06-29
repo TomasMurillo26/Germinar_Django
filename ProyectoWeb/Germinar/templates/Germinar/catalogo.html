@@ -18,77 +18,95 @@
                 <h3>Filtros</h3>
                 <h4>Tipo de planta</h4>
                 <form action="#" method="get" class="form-filtro" name="form-filtro" id="form-filtro">
+
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="interior" id="plantaInterior" name="plantaInterior" checked>
                         <label class="form-check-label" for="flexCheckDefault">
                             Plantas de interior
                         </label>
                     </div>
+
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="exterior" id="plantaExterior" name="plantaExterior">
                         <label class="form-check-label" for="flexCheckChecked">
                             Plantas de exterior
                         </label>
                     </div>
+
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="jardin" id="articulosJardin" name="articulosJardin">
                         <label class="form-check-label" for="flexCheckChecked">
                             Articulos de jard&iacute;n
                         </label>
                     </div>
+
                     <h4>Rango de precio</h4>
+
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="precio" id="10mil" value="10mil">
                         <label class="form-check-label" for="flexRadioDefault1">
                             $10.000 - $30.000
                         </label>
                     </div>
+
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="precio" id="30mil" value="30mil">
                         <label class="form-check-label" for="flexRadioDefault2">
                             $31.000 - $50.000
                         </label>
                     </div>
+
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="precio" id="50mil" value="50mil">
                         <label class="form-check-label" for="flexRadioDefault2">
                             $51.000 - $70.000
                         </label>
                     </div>
+
                     <div class="buttonfiltro">
                         <button class="btn-mostrar btn-primary" style="font-size: 1.5rem; " type="submit" id="submitFiltro">Aplicar filtros</button>
                     </div>
+
                 </form>
             </div>
         </aside>
-        {% load humanize %}
-        <section class="contenedor1">
+        <section class="contenedor ">
+            {% load humanize %}
             <div class="titulo-catalogo nombre1">
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
                     Nuestros Productos
                 </h1>
             </div>
-            {% for p in productos %}
-            <div class="">
-                <div class="producto imag_planta1" type="submit" id="enviar" value="Ver producto">
-                    <form action="{% url 'planta' %}" id="formPlanta">
-                        <div class="imag_planta1">
-                            {% if p.imagenProducto %}
-                                <img src="{{ p.imagenProducto.url }}" alt="imagen planta">
-                            {% endif %}
+            <div class="catalogo">
+                {% for p in productos %}
+                    {% if p.categoria == 'Plantas_interior'%}
+                    <div class="catalogo">
+                        <div class="producto imag_planta1" type="submit" id="enviar" value="Ver producto">
+                            <form action="{% url 'planta' %}" id="formPlanta">
+                                <div class="card">
+                                    <input type="text" name="categoria" id="categoria" value="${item.categoria}" style="display: none;">
+                                    <input type="text" name="id" id="id" value="${item.id}" style="display: none;">
+                                    {% if p.imagenProducto %}
+                                        <img src="{{ p.imagenProducto.url }}" alt="imagen planta">
+                                    {% endif %}
+                                </div>
+                                <div class="producto__informacion">
+                                    <p class="producto__nombre">{{ p.nombreProducto | title}}</p>
+                                    <p class="producto__precio">${{ p.precio | intcomma}}</p>
+                                    <input type="submit" class="btn btn-primary" id="enviar" value="Ver producto">
+                                </div>
+                            </form>
                         </div>
-                        <div class="producto__informacion">
-                            <p class="producto__nombre">{{ p.nombreProducto | title}}</p>
-                            <p class="producto__precio">${{ p.precio | intcomma}}</p>
-                            <input type="submit" class="btn btn-primary" id="enviar" value="Ver producto">
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    {% else %}
+                    <p class="">{{ p.nombreProducto}}</p>
+                    {% endif %}
+                    <p class="producto__precio">{{ p.categoria}}</p>
+                {% endfor %}
             </div>
-            {% endfor %}
         </section>
     </main>
-{% endblock %}
+    {% endblock %}
 
 {% block js %}
     <script src="{% static 'Germinar/js/planta-interior.js' %}"></script>
