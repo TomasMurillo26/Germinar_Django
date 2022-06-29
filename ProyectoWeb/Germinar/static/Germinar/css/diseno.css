@@ -2477,7 +2477,27 @@ input[type="number"] {
 
 .btn-filtro {
     background-color: var(--verdeOscuro);
+}
 
+.parte1{
+    width: 300px;
+    height: 350px;
+    margin: 10px;
+}
+
+.imag_planta1{
+    position: relative;
+    align-items: center;
+    width: 300px;
+    height: 350px;
+    margin: 10px;
+}
+
+.imag_planta1 img{
+    height: auto;
+    width: auto;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .btn-submit-buscar {

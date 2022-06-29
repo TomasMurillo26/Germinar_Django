@@ -70,7 +70,23 @@
                 </form>
             </div>
         </aside>
-
+        <section class="contenedor1">
+        {% for p in productos %}
+        <div class="">
+            <div class="producto imag_planta1" type="submit" id="enviar" value="Ver producto">
+                <form action="" id="formPlanta">
+                    <div class="imag_planta1">
+                        {% if p.imagenProducto %}
+                            <img src="{{ p.imagenProducto.url }}" alt="imagen planta">
+                        {% endif %}
+                    </div>
+                    <div class="producto__informacion">
+                        <p class="producto__nombre">{{ p.nombreProducto | title}}</p>
+                        <p class="producto__precio">${{ p.precio | intcomma}}</p>
+                        <input type="submit" class="btn btn-primary" id="enviar" value="Ver producto">
+                </form>
+            </div>
+            {% endfor %}
         <section class="contenedor">
             <div class="titulo-catalogo nombre1">
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >Nuestros Productos</h1>
