@@ -5,6 +5,17 @@
     {% block title %} catalogo {% endblock %}
 
     {% block links%}
+{% block content %}
+{% load humanize %}
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo</title>
+    <link type="text/css" rel="stylesheet" href ="{% static 'Germinar/css/diseno.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'Germinar/css/normalize.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
@@ -13,7 +24,7 @@
 
     {% block content %}
     <main class="grid-catalogo">
-        <aside class="side-bar contenedor ">
+        <aside class="side-bar contenedor">
             <div class="filtros contenedor-filtros">
                 <h3>Filtros</h3>
                 <h4>Tipo de planta</h4>
@@ -72,6 +83,8 @@
         </aside>
         <section class="contenedor ">
             {% load humanize %}
+
+        <section class="contenedor">
             <div class="titulo-catalogo nombre1">
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
                     Nuestros Productos
@@ -101,6 +114,25 @@
                     {% else %}
                     <p class="">{{ p.categoria}} es {{ p.nombreProducto}}</p>
                     {% endif %}
+                {% endfor %}
+            </div>
+            <!--este div es la lista de la api-->
+            <div class="grid-catalogo2">
+                {% for p in productos %}
+                <div class="producto">
+                    <div class="prod">
+                        <div class="producto__imagen">
+                            {% if p.imagenProducto %}
+                            <img src="{{p.imagenProducto.url}}" alt="imagen planta">
+                            {% endif %}
+                        </div>
+                        <div class="producto__informacion">
+                            <p class="producto__nombre">{{p.nombreProducto}}</p>
+                            <p class="producto__precio">${{p.precio | intcomma}}</p>
+                        </div>
+                        <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
         </section>

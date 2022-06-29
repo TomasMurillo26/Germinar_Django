@@ -28,10 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # Application definition
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 INSTALLED_APPS = [
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,14 +43,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Germinar',
-    'lista_planta',
-    'rest_framework.authtoken',
+    'crispy_forms',
+    'django_cleanup',
     'django.contrib.humanize',
+    'rest_framework',
+    'rest_germinar',
+    'carro',
+    'colorfield',
+    'pedidos',
+    'rest_framework.authtoken'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-X_FRAME_OPTIONS = "SAMEORIGIN"
+X_FRAME_OPTIONS= 'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,18 +83,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'carro.context_processor.total_carro'
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'ProyectoWeb.wsgi.application'
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-}
 
 
 # Database
@@ -140,5 +145,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK={
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 MEDIA_URL = 'media/'
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdF06QgAAAAAOrp8jObOYa9GYNT2h--7t3BzOF2'

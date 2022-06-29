@@ -2,9 +2,9 @@
 {% block title %} listadoProductos {% endblock %}
 <!DOCTYPE html>
 {% block content %}
+{% load humanize %}
 {% load static %}
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +25,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
+{% block js %}
+<script>
+    function eliminarProd(idProducto) {
+        Swal.fire({
+            "title": "¿Eliminar producto?",
+            "width": "600",
+            "text": "Eliminará el producto del listado",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonColor": "#91a0a3",
+            "cancelButtonText": "Cancelar",
+            "confirmButtonColor": "#1f4550",
+            "padding": "2rem",
+            "confirmButtonText": "Confirmar"
+        })
+        .then(function (result) {
+            if (result.isConfirmed) {
+                window.location.href = "eliminarProducto/"+idProducto
+                }
+            })
+    }
+</script>
+{% endblock %}
 <script>
     $(document).ready(function () {
         $("#nombreProd").on("keyup", function () {
@@ -42,26 +65,6 @@
 </script>
 
 <body>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <h3> Desea eliminar el producto {{prod.nombreProducto}}</h3>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Eliminar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="contenedor3">
         <div class="titulo-listado">
             <h2>Listado de productos</h2>
@@ -92,21 +95,24 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            {% for prod in productos %}
+            {% for prod in entity %}
             <tbody id="tabla-prod">
                 <tr>
                     <td>{{prod.idProducto}}</td>
                     <td>{{prod.nombreProducto}}</td>
                     <td>{{prod.cantidad}}</td>
-                    <td>${{prod.precio}}</td>
+                    <td>${{prod.precio | intcomma }}</td>
                     <td>{{prod.categoria}}</td>
                     <td><a class="btn btn-warning btn-lg" href="{% url 'actualizarProducto' prod.idProducto %}">Modificar</a></td>
-                    <td><a href="eliminarProducto/{{prod.idProducto}}" class="btn btn-danger btn-lg" >Eliminar</a></td>
+                    <td><a href="#" onclick="eliminarProd({{prod.idProducto}})" class="btn btn-danger btn-lg" >Eliminar</a></td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
-        <div class="contenedor2">
+        <div>
+            {% include 'Germinar/paginator.html' %}
+        </div>
+        <div class="btn-registrar contenedor2">
             <a style="text-decoration: none;" class="btn-submit btn-primary-listo" href="{% url 'agregarProducto' %}">Agregar Nuevo producto</a>
         </div>
     </div>

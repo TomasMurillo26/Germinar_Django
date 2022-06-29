@@ -2,16 +2,19 @@
 {% block title %} agregarProducto {% endblock %}
 <!DOCTYPE html>
 {% block content %}
-{% load static %} 
+{% load crispy_forms_tags %}
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link type="text/css" rel="preload" href="{% static 'Germinar/css/diseno.css' %}">
-    <link type="text/css" rel="stylesheet" href ="{% static 'Germinar/css/diseno.css' %}">
-    <link type="text/css" rel="preload" href="{% static 'Germinar/css/normalize.css' %}"> <!--Ayudará en normalizar la vista de la página para todos los navegadores, asi no habrá distinciones entre abrir la página en diferentes navegadores-->
+    <link type="text/css" rel="stylesheet" href="{% static 'Germinar/css/diseno.css' %}">
+    <link type="text/css" rel="preload" href="{% static 'Germinar/css/normalize.css' %}">
+    <!--Ayudará en normalizar la vista de la página para todos los navegadores, asi no habrá distinciones entre abrir la página en diferentes navegadores-->
     <link type="text/css" rel="stylesheet" href="{% static 'Germinar/css/normalize.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -23,15 +26,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
+
 <script>
-    function toggleButton()
-    {
-        var nombreProd = document.getElementById('nombreProd').value;
+    function toggleButton() {
+        var nombreProd = document.getElementById('nombreProducto').value;
         var cantidad = document.getElementById('cantidad').value;
         var precio = document.getElementById('precio').value;
-        var categoria = document.getElementById('categoria').value;
+        var categoria = document.getElementById('id_categoria').value;
         var descripcion = document.getElementById('descripcion').value;
-        var seleccionArchivos = document.getElementById('seleccionArchivos').value;
+        var seleccionArchivos = document.getElementById('id_imagenProducto').value;
 
         if (nombreProd && cantidad && categoria && precio && descripcion && seleccionArchivos) {
             document.getElementById('submitButton').disabled = false;
@@ -40,62 +43,29 @@
         }
     }
 </script>
+
 <body>
     <div class="contenedor-form">
         <div class="contenedor3">
             <div class="subt-pago">
                 <h2>Agregar producto</h2>
             </div>
-            <form action="#" method="post" enctype="multipart/form-data" class="form-usuario contenedor2" name="form-producto" id="form-producto">
+
+            <form action="#" method="post" enctype="multipart/form-data" class="form-producto contenedor2"
+                name="form-producto" id="form-producto">
                 {% csrf_token %}
-                {{ form.as_table }}
-                <div class="mb-3">
-                    <label for="{{ forms.nombreProducto.id_for_label }}" class="form-label-prod verde">Nombre producto</label>
-                    <input type="text" minlength="5" maxlength="50" class="form-control-prod" name="{{forms.nombreProducto.html_name}}" id="nombreProd" onchange="toggleButton()">
-                </div>
-                <div class="cantidad-precio">
-                    <div class="mb-3">
-                        <label for="{{ forms.cantidad.id_for_label }}" class="form-label-prod verde">Cantidad</label>
-                        <input type="number" class="form-control-prod" min="1" name="{{forms.cantidad.html_name}}" id="cantidad" onchange="toggleButton()" required="required">
-                    </div>
-                    <br>
-                    <div class="mb-3">
-                        <label for="{{forms.precio.id_for_label}}" class="form-label-prod verde">Precio</label>
-                        <input type="number" class="form-control-prod" name="{{forms.precio.html_name}}" id="precio" onchange="toggleButton()" placeholder="$"></span>
-                    </div>
-                </div>
-                <div class="cat">
-                    <label for="{{forms.categoria.id_for_label}}" class="form-label-prod verde">Categor&iacute;a del producto</label>
-                    <select class="form-select-prod" name="{{forms.categoria.html_name}}" id="categoria" onchange="toggleButton()" aria-label="Default select example">
-                        <option selected>Selecciona una categor&iacute;a</option>
-                        {% for cat in categorias %}
-                            <option >{{cat.nombreCategoria}}</option>
-                        {% endfor %} 
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="{{ forms.descripcion.id_for_label }}" class="form-label-prod verde">Descripci&oacute;n</label>
-                    <textarea type="text" class="form-control-prod" onchange="toggleButton()" minlength="10" 
-                    maxlength="1000" name="{{forms.descripcion.html_name}}" id="descripcion" placeholder="Maximo 1000 caracteres"></textarea>
-                </div>
-                <div class="cuadro-imagen container-fluid">
-                    <div class="cuadro-file contenedor2">
-                        <input for="{{forms.imagenProducto.id_for_label}}" class="imagen-producto" type="file" name="{{forms.imagenProducto.html_name}}" id="seleccionArchivos" onchange="toggleButton()" accept="image/">
-                    </div>
-                    <br>
-                    <div class="cuadro-view contenedor2 ">
-                        <img id="imagenPrevisualizacion" alt="">
-                    </div>
-                </div>  
+                {{forms | crispy}}
                 <div class="btn-registrar contenedor2">
-                    <button type="submit" id="submitButton" class="btn-submit btn-primary-listo" value="Enviar" disabled>Registrar Producto</button>
-                </div>    
+                    <button type="submit" id="submitButton" class="btn-submit btn-primary-listo" 
+                        value="Enviar">Registrar Producto</button>
+                </div>
             </form>
-        </div>      
+        </div>
     </div>
-</div>
+    </div>
     <div class="boton-volver contenedor2">
-        <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">Volver</button>
+        <button type="button" onclick="history.back('/listaProductos/')"
+            class="btn btn-secondary btn-sm">Volver</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -106,5 +76,6 @@
     <script src="{% static 'Germinar/js/script.js' %}"></script>
     <script src="{% static 'Germinar/js/calendario.js' %}"></script>
 </body>
+
 </html>
 {% endblock %}
