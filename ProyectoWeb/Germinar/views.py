@@ -2,6 +2,8 @@ from pyexpat.errors import messages
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
 import datetime
+from rest_framework.authtoken.models import Token
+from requests import Response
 from carro.carro import Carro
 from .models import producto
 from .forms import productoForm, CustomUserCreationForm
@@ -135,11 +137,11 @@ def formulario(request):
                 formulario.save()
                 user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
                 login(request,user)
+                token = Token.objects.get(user=user).key
                 messages.success(request, "Te has registrado correctamente")
+                return redirect(to="principal")
             else:
                 messages.error(request, 'reCaptcha Invalido. Intenta nuevamente')
-
-            return redirect(to="principal")
         datos["form"] = formulario
     return render(request, 'registration/formulario.html',datos)
 
