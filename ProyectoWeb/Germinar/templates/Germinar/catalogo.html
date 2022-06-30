@@ -4,7 +4,7 @@
 {% load static %}
     {% block title %} catalogo {% endblock %}
 
-    {% block links%}
+{% block links%}
 {% block content %}
 {% load humanize %}
 {% load static %} 
@@ -22,7 +22,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {% endblock%}
 
-    {% block content %}
     <main class="grid-catalogo">
         <aside class="side-bar contenedor">
             <div class="filtros contenedor-filtros">
@@ -83,16 +82,13 @@
         </aside>
         <section class="contenedor ">
             {% load humanize %}
-
-        <section class="contenedor">
             <div class="titulo-catalogo nombre1">
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
                     Nuestros Productos
                 </h1>
             </div>
-            <div class="catalogo">
-                {% for p in productos %}
-                    {% if p.categoria == 'Plantas_interior'%}
+            {% for p in productos %}
+                {% if p.categoria == 'Plantas_interior'%}
                     <div class="catalogo">
                         <div class="producto imag_planta1" type="submit" id="enviar" value="Ver producto">
                             <form action="{% url 'planta' %}" id="formPlanta">
@@ -115,7 +111,7 @@
                     <p class="">{{ p.nombreProducto}}</p>
                     {% endif %}
                     <p class="producto__precio">{{ p.categoria}}</p>
-                {% endfor %}
+            {% endfor %}
             </div>
             <!--este div es la lista de la api-->
             <div class="grid-catalogo2">
