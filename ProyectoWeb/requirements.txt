@@ -4,5 +4,6 @@ django-crispy-forms
 django-cleanup
 django-rest-framework
 django-admin-interface
+requests
 
 #pip install -r requirements.txt
