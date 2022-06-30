@@ -5,9 +5,8 @@
     {% block title %} catalogo {% endblock %}
 
     {% block links%}
-{% block content %}
 {% load humanize %}
-{% load static %} 
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -89,32 +88,6 @@
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
                     Nuestros Productos
                 </h1>
-            </div>
-            <div class="catalogo">
-                {% for p in productos %}
-                    {% if p.categoria == 'plantasexterior'%}
-                    <div class="catalogo">
-                        <div class="producto imag_planta1" type="submit" id="enviar" value="Ver producto">
-                            <form action="{% url 'planta' %}" id="formPlanta">
-                                <div class="card">
-                                    <input type="text" name="categoria" id="categoria" value="${item.categoria}" style="display: none;">
-                                    <input type="text" name="id" id="id" value="${item.id}" style="display: none;">
-                                    {% if p.imagenProducto %}
-                                        <img src="{{ p.imagenProducto.url }}" alt="imagen planta">
-                                    {% endif %}
-                                </div>
-                                <div class="producto__informacion">
-                                    <p class="producto__nombre">{{ p.nombreProducto | title}}</p>
-                                    <p class="producto__precio">${{ p.precio | intcomma}}</p>
-                                    <input type="submit" class="btn btn-primary" id="enviar" value="Ver producto">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    {% else %}
-                    <p class="">{{ p.categoria}} es {{ p.nombreProducto}}</p>
-                    {% endif %}
-                {% endfor %}
             </div>
             <!--este div es la lista de la api-->
             <div class="grid-catalogo2">
