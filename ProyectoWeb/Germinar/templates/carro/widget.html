@@ -1,0 +1,60 @@
+{% load humanize %}
+<br>
+<br>
+<br>
+<table class="table table-hover tabla-prod">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre producto</th>
+            <th scope="col" style="text-align: center;">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody id="tabla-prod">
+        {% if request.session.carro.items %}
+            {% for key, value in request.session.carro.items %}
+                <tr>
+                    <td>{{value.idProducto}}</td>
+                    <td>{{value.nombreProducto}}</td>
+                    <td style="text-align:center;">{{value.cantidad}}</td>
+                    <td>${{value.precio | intcomma}}</td>
+                    <td class="flex-boton"><a href="{% url 'carro:add' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-sm btn-success">+</a>
+                        <a href="{% url 'carro:restar' value.idProducto %}" style="font-size: 20px; padding: 10px; width: 50%;" class="btn btn-danger btn-lg" >-</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6">
+                    <br>
+                    <div class="alert alert-danger text-center">
+                        Sin productos
+                    </div>
+                    <br>
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+<br>
+<br>
+{% if user.is_authenticated %}
+    {% if request.session.carro.items %}
+        <div class="carrito-sub">
+            <h2>Total: ${{total_carro | intcomma}}</h2>
+            <a class="btn-login" href="{% url 'formulario' %}">Comprar</a>
+        </div>
+    {% else %}
+    <div class="carrito-sub">
+        <h2>Total: ${{total_carro | intcomma}}</h2>
+    </div>
+    {% endif %}
+{% else %}
+    <div class="carrito-sub">
+        <h2>Inicia sesión para continuar con tu compra</h2>
+        <a class="btn-login" href="{% url 'formulario' %}">Registrate aquí</a>
+    </div>
+{% endif %}
+<br>

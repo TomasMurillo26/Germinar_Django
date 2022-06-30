@@ -2,6 +2,7 @@
 {% block title %} Planta {% endblock %}
 <!DOCTYPE html>
 {% block content %}
+{% load humanize %}
 {% load static %} 
 <html lang="en">
 <head>
@@ -23,11 +24,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
+
 <body style="background-color: #C7D0D8;">
-    <!--uso de API-->
-    <div class="contenedor2" id="plantaCiclo"></div>
+    <div class="contenedor2">
+        <main class="plantas_cuadro contenedor3">
+            <div class="planta_img">
+                {% if productos.imagenProducto %}
+                    <img src="{{productos.imagenProducto.url}}" alt="imagen planta">
+                {% endif %}
+            </div>
+            <div class="planta_info">
+            
+                <h1>{{productos.nombreProducto}}</h1>
+                <h2>${{productos.precio | intcomma}}</h2>
+                <div class="info_cliente">
+                    <h3>Stock: {{productos.cantidad}}</h3>
+                </div>
+                <p>
+                    {{productos.descripcion}}
+                </p>
+                <div class="boton" style="text-align: left;">
+                <div class="boton">
+                    <a href = "{% url 'carro:agregar' productos.idProducto %}" class="btn-login ">Agregar al carrito</a>
+                </div>
+            </div>
+        </main>
+    </div>
     <div class="boton-volver contenedor2">
-        <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm">Volver</button>
+        <a type="button" href="{% url 'catalogo'%}" class="btn-login">Volver</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

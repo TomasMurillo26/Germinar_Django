@@ -2,6 +2,7 @@
 {% block title %} carrito {% endblock %}
 <!DOCTYPE html>
 {% block content %}
+{% load humanize %}
 {% load static %} 
 <html lang="en">
 <head>
@@ -24,7 +25,10 @@
 </head>
 <body style="background-image: linear-gradient(to bottom, #C7D0D8 30%, white 100%);">
     <section class="contenedor3">
+        <br>
+        <br>
         <h1>Tus productos</h1>
+        {% include "carro/widget.html" %}
     </section>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
