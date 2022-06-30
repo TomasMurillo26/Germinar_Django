@@ -4,11 +4,12 @@
 {% load static %}
     {% block title %} catalogo {% endblock %}
 
-    {% block links%}
+
+
 {% load humanize %}
 {% load static %}
-<html lang="en">
-<head>
+
+{% block links%}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,13 +83,10 @@
         </aside>
         <section class="contenedor ">
             {% load humanize %}
-
-        <section class="contenedor">
             <div class="titulo-catalogo nombre1">
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
                     Nuestros Productos
                 </h1>
-            </div>
             <!--este div es la lista de la api-->
             <div class="grid-catalogo2">
                 {% for p in productos %}
