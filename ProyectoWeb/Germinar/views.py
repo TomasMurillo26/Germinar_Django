@@ -1,3 +1,4 @@
+from pyexpat import model
 from pyexpat.errors import messages
 from django.http import Http404
 from django.shortcuts import redirect, render, get_object_or_404
@@ -17,7 +18,7 @@ from django.conf import settings
 import json
 import urllib
 from .filters import FiltroVista
-from django.views.generic import Listview
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -147,12 +148,12 @@ def formulario(request):
         datos["form"] = formulario
     return render(request, 'registration/formulario.html',datos)
 
-class Home(ListView):
-    
-	model = Producto
-	template_name = 'tu_app/nombre_template.html'
 
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context['filter'] = FiltroVista(self.request.GET, queryset = self.get_queryset())
-		return context
+class Home(ListView):
+    model = producto
+    template_name = 'tu_app/nombre_template.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = FiltroVista(self.request.GET, queryset = self.get_queryset())
+        return context

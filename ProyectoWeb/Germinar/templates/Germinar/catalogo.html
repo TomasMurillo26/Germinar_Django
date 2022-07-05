@@ -125,23 +125,19 @@
         </section>
     </main>
 
-    <form method="GET">
-
-        {{ filter.form }}
-    
+    <!--filtros referencia-->
+    <form>
+        {{ filter.form}}
         <button type="submit" class="btn btn-primary">Filtrar</button>
-    
     </form>
     <hr>
-    # desplegar resultados con...
-    
-    <div class='container-fluid'>
     {% for i in filter.qs %}
-        <p>{{ i.nombre }}</p>
-        <p>{{ i.categoria }}</p>
-        <p>{{ i.precio }}</p>
+    <p>{{ i.nombreProducto }}</p>
+    <p>{{ i.categoria }}</p>
+    <p>{{ i.precio }}</p>
     {% endfor %}
-    </div>
+    <!--filtros referencia-->
+
     {% endblock %}
 
 {% block js %}
