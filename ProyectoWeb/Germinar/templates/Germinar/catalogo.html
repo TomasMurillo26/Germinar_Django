@@ -90,24 +90,58 @@
             <!--este div es la lista de la api-->
             <div class="grid-catalogo2">
                 {% for p in productos %}
-                <div class="producto">
-                    <div class="prod">
-                        <div class="producto__imagen">
-                            {% if p.imagenProducto %}
-                            <img src="{{p.imagenProducto.url}}" alt="imagen planta">
-                            {% endif %}
+                    {% if productos.precio == '29990' %}
+                        <div class="producto">
+                            <div class="prod">
+                                <div class="producto__imagen">
+                                    {% if p.imagenProducto %}
+                                    <img src="{{p.imagenProducto.url}}" alt="imagen planta">
+                                    {% endif %}
+                                </div>
+                                <div class="producto__informacion">
+                                    <p class="producto__nombre">{{p.nombreProducto}}</p>
+                                    <p class="producto__precio">${{p.precio | intcomma}}</p>
+                                </div>
+                                <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
+                            </div>
                         </div>
-                        <div class="producto__informacion">
-                            <p class="producto__nombre">{{p.nombreProducto}}</p>
-                            <p class="producto__precio">${{p.precio | intcomma}}</p>
+                    {% endif %}
+                    <div class="producto">
+                        <div class="prod">
+                            <div class="producto__imagen">
+                                {% if p.imagenProducto %}
+                                <img src="{{p.imagenProducto.url}}" alt="imagen planta">
+                                {% endif %}
+                            </div>
+                            <div class="producto__informacion">
+                                <p class="producto__nombre">{{p.nombreProducto}}</p>
+                                <p class="producto__precio">${{p.precio | intcomma}}</p>
+                            </div>
+                            <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
                         </div>
-                        <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </section>
     </main>
+
+    <form method="GET">
+
+        {{ filter.form }}
+    
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    
+    </form>
+    <hr>
+    # desplegar resultados con...
+    
+    <div class='container-fluid'>
+    {% for i in filter.qs %}
+        <p>{{ i.nombre }}</p>
+        <p>{{ i.categoria }}</p>
+        <p>{{ i.precio }}</p>
+    {% endfor %}
+    </div>
     {% endblock %}
 
 {% block js %}

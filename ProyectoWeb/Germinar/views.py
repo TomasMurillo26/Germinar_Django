@@ -16,6 +16,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 import json
 import urllib
+from .filters import FiltroVista
+from django.views.generic import Listview
 
 # Create your views here.
 
@@ -145,3 +147,12 @@ def formulario(request):
         datos["form"] = formulario
     return render(request, 'registration/formulario.html',datos)
 
+class Home(ListView):
+    
+	model = Producto
+	template_name = 'tu_app/nombre_template.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['filter'] = FiltroVista(self.request.GET, queryset = self.get_queryset())
+		return context

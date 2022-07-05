@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'carro',
     'colorfield',
     'pedidos',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django_filters',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
