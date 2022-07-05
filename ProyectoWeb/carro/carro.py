@@ -1,5 +1,4 @@
 from requests import session
-
 class Carro:
     def __init__(self, request):
         self.request = request

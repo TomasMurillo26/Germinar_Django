@@ -24,7 +24,8 @@ urlpatterns = [
     path('api/', include('rest_germinar.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('carro/', include('carro.urls')),
-    path('pedidos/', include('pedidos.urls'))
+    path('pedidos/', include('pedidos.urls')),
+    path('suscripcion/', include('suscripcion.urls'))
 ]
 
 if settings.DEBUG:

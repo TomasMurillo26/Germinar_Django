@@ -44,12 +44,15 @@
     {% if request.session.carro.items %}
         <div class="carrito-sub">
             <h2>Total: ${{total_carro | intcomma}}</h2>
-            <a class="btn-login" href="{% url 'formulario' %}">Comprar</a>
+            <a class="btn-login" href="{% url 'pedidos:procesar' %}">Comprar</a>
         </div>
     {% else %}
-    <div class="carrito-sub">
-        <h2>Total: ${{total_carro | intcomma}}</h2>
-    </div>
+    {% if object.tipoMembresia != 'free' %}
+        <div class="carrito-sub">
+            <h2>Total: ${{total_carro | intcomma}}</h2>
+        </div>
+    {% endif %}
+
     {% endif %}
 {% else %}
     <div class="carrito-sub">
