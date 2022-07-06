@@ -2,7 +2,7 @@
 {% block title %} Germinar tienda {% endblock %}
 <!DOCTYPE html>
 {% block content %}
-{% load static %} 
+{% load static %}
 <html>
 <head>
     <meta charset="UTF-8">
@@ -117,7 +117,7 @@
         <div class="carousel-inner">
             {% if user.is_authenticated %}
             <div class="carousel-item active">
-                <a href="{% url 'catalogo' %}"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel1.jpg' %}" class="d-block w-100" alt="..."></a>
+                <a href="{% url 'Home' %}"><img class="img-carrusel" src="{% static 'Germinar/img/carrusel1.jpg' %}" class="d-block w-100" alt="..."></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Bienvenido {{user.username}}</h5>
                     <p>Ve nuestro cat&aacute;logo de productos</p>
@@ -172,7 +172,7 @@
                         <h3>Plantas de Exterior</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
                         <div class="link">
-                            <a href="{% url 'catalogo' %}">Ver</a>
+                            <a href="{% url 'Home' %}">Ver</a>
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
                         <h3>Plantas de Interior</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
                         <div class="link">
-                            <a href="{% url 'catalogo' %}">Ver</a>
+                            <a href="{% url 'Home' %}">Ver</a>
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                         <h3>Articulos de jard&iacute;n</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
                         <div class="link">
-                            <a href="{% url 'catalogo' %}">Ver</a>
+                            <a href="{% url 'Home' %}">Ver</a>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                         <h3>Ofertas</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
                         <div class="link">
-                            <a href="{% url 'catalogo' %}">Ver</a>
+                            <a href="{% url 'Home' %}">Ver</a>
                         </div>
                     </div>
                 </div>
@@ -224,7 +224,7 @@
                         <h3>Libros de Plantas</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend elementum cursus. Morbi porta sapien non arcu tincidunt viverra. Sed.</p>
                         <div class="link">
-                            <a href="{% url 'catalogo' %}">Ver</a>
+                            <a href="{% url 'Home' %}">Ver</a>
                         </div>
                     </div>
                 </div>
@@ -342,3 +342,5 @@
 </body>
 </html>
 {% endblock %}
+
+no such column: Germinar_catproducto.id

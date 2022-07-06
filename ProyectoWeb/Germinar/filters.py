@@ -16,7 +16,7 @@ class FiltroVista(django_filters.FilterSet):
         model = producto
         fields = {
             'nombreProducto' : ['icontains'],
-			'categoria' : ['icontains'],
+			'categoria' : ['exact'],
 			'precio':['lt','gt'],
         }
 

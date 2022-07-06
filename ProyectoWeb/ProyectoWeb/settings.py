@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'pedidos',
     'rest_framework.authtoken',
     'django_filters',
+    'bootstrapform',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

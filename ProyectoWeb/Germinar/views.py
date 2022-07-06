@@ -33,13 +33,6 @@ def principal(request):
     carro=Carro(request)
     return render(request, 'Germinar/principal.html')
 
-def catalogo(request):
-    productos = producto.objects.all()
-    datos = {
-        'productos': productos
-    }
-    return render(request, 'Germinar/catalogo.html',datos)
-
 @login_required(login_url='/accounts/login/')
 def carrito(request):
 
@@ -151,9 +144,10 @@ def formulario(request):
 
 class Home(ListView):
     model = producto
-    template_name = 'tu_app/nombre_template.html'
+    template_name = 'Germinar/catalogo.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = FiltroVista(self.request.GET, queryset = self.get_queryset())
         return context
+    

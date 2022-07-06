@@ -5,11 +5,11 @@
     {% block title %} catalogo {% endblock %}
 
 
-
+{% load bootstrap %}
 {% load humanize %}
 {% load static %}
 
-{% block links%}
+    {% block links%}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,117 +24,49 @@
 
     {% block content %}
     <main class="grid-catalogo">
-        <aside class="side-bar contenedor">
-            <div class="filtros contenedor-filtros">
-                <h3>Filtros</h3>
-                <h4>Tipo de planta</h4>
-                <form action="#" method="get" class="form-filtro" name="form-filtro" id="form-filtro">
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="interior" id="plantaInterior" name="plantaInterior" checked>
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Plantas de interior
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="exterior" id="plantaExterior" name="plantaExterior">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Plantas de exterior
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="jardin" id="articulosJardin" name="articulosJardin">
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Articulos de jard&iacute;n
-                        </label>
-                    </div>
-
-                    <h4>Rango de precio</h4>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="precio" id="10mil" value="10mil">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            $10.000 - $30.000
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="precio" id="30mil" value="30mil">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            $31.000 - $50.000
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="precio" id="50mil" value="50mil">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            $51.000 - $70.000
-                        </label>
-                    </div>
-
-                    <div class="buttonfiltro">
-                        <button class="btn-mostrar btn-primary" style="font-size: 1.5rem; " type="submit" id="submitFiltro">Aplicar filtros</button>
-                    </div>
-
-                </form>
-            </div>
-        </aside>
         <section class="contenedor ">
-            {% load humanize %}
             <div class="titulo-catalogo nombre1">
                 <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
                     Nuestros Productos
                 </h1>
-            <!--este div es la lista de la api-->
-            <div class="grid-catalogo2">
-                {% for p in productos %}
-                    {% if productos.precio == '29990' %}
-                        <div class="producto">
-                            <div class="prod">
-                                <div class="producto__imagen">
-                                    {% if p.imagenProducto %}
-                                    <img src="{{p.imagenProducto.url}}" alt="imagen planta">
-                                    {% endif %}
-                                </div>
-                                <div class="producto__informacion">
-                                    <p class="producto__nombre">{{p.nombreProducto}}</p>
-                                    <p class="producto__precio">${{p.precio | intcomma}}</p>
-                                </div>
-                                <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
-                            </div>
-                        </div>
-                    {% endif %}
-                    <div class="producto">
-                        <div class="prod">
-                            <div class="producto__imagen">
-                                {% if p.imagenProducto %}
-                                <img src="{{p.imagenProducto.url}}" alt="imagen planta">
-                                {% endif %}
-                            </div>
-                            <div class="producto__informacion">
-                                <p class="producto__nombre">{{p.nombreProducto}}</p>
-                                <p class="producto__precio">${{p.precio | intcomma}}</p>
-                            </div>
-                            <td><a class="btn-login" href="{% url 'planta' p.idProducto %}">Ver producto</a></td>
-                        </div>
-                    </div>
-                {% endfor %}
             </div>
         </section>
     </main>
 
     <!--filtros referencia-->
-    <form>
-        {{ filter.form}}
+    <form method="GET">
+        {{ filter.form|bootstrap }}
         <button type="submit" class="btn btn-primary">Filtrar</button>
     </form>
     <hr>
+
     {% for i in filter.qs %}
-    <p>{{ i.nombreProducto }}</p>
-    <p>{{ i.categoria }}</p>
-    <p>{{ i.precio }}</p>
+        <div class='filtros contenedor-filtros'>
+            <div class="producto">
+                <div class="prod">
+                    <div class="producto__imagen">
+                        <img src="{{i.imagenProducto.url}}" alt="imagen planta">
+                    </div>
+                    <div class="producto__informacion">
+                        <p class="producto__nombre">{{i.nombreProducto}}</p>
+                        <p class="producto__precio">${{i.precio | intcomma}}</p>
+                    </div>
+                    <td><a class="btn-login" href="{% url 'planta' i.idProducto %}">Ver producto</a></td>
+                </div>
+            </div>
+            <div class="producto">
+                <div class="prod">
+                    <div class="producto__imagen">
+                        <img src="{{i.imagenProducto.url}}" alt="imagen planta">
+                    </div>
+                    <div class="producto__informacion">
+                        <p class="producto__nombre">{{i.nombreProducto}}</p>
+                        <p class="producto__precio">${{i.precio | intcomma}}</p>
+                    </div>
+                    <td><a class="btn-login" href="{% url 'planta' i.idProducto %}">Ver producto</a></td>
+                </div>
+            </div>
+        </div>
     {% endfor %}
     <!--filtros referencia-->
 

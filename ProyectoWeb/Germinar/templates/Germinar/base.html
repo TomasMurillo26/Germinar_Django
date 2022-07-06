@@ -91,13 +91,13 @@
                         </svg></span>
                 </a>
             </div>
-        </header-top>
+        </main>
         <!--ENCABEZADO-->
     </header>
     <div class="sticky">
         <nav class="topnav" id="myTopnav">
             <a href="{% url 'principal' %}" class="active">Inicio</a>
-            <a href="{% url 'catalogo' %}">Tienda online</a>
+            <a href="{% url 'Home' %}">Tienda online</a>
             <a href="{% url 'seguimiento' %}">Seguimiento en l&iacute;nea</a>
             {% if perms.Germinar.add_producto %}
             <a href="{% url 'agregarProducto' %}">Agregar Producto</a>

@@ -104,4 +104,3 @@ class productoForm(ModelForm):
                 'validators': [MaxSizeFileValidator(max_file_size=2)]
                 
             })
-            
