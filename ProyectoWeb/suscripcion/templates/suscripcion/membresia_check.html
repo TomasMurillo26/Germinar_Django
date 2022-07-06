@@ -1,0 +1,31 @@
+{% extends "Germinar/base.html" %}
+{% block title %} Membresia_confirmar {% endblock %}
+<!DOCTYPE html>
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membresia_confirmar</title>
+</head>
+<body>
+    <div class="contenedor-form">
+        <div class="contenedor3">
+            <div class="subt-pago">
+                <h2>Confirmar Suscripcion</h2>
+            </div>
+            <br>
+            <br>
+            <h2>Suscripcion elegida: {{ membresia_seleccionada }}</h2>
+            <form href="" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="{{ membresia_seleccionada }}" class="card-link">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

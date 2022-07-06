@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'carro',
     'colorfield',
     'pedidos',
+    'suscripcion',
     'rest_framework.authtoken'
 ]
 
