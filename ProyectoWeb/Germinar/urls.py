@@ -3,7 +3,7 @@ from . import views
 from .views import agregarProducto, eliminarProducto, formulario, principal, listaProductos, seguimiento, base, planta, carrito, actualizarProducto, formulario
 
 urlpatterns = [
-    path('', views.Home.as_view(), name='Home'),
+    path('home', views.Home.as_view(), name='Home'),
     path('formulario', formulario, name='formulario'),
     path('seguimiento', seguimiento, name='seguimiento'),
     path('planta/<int:id>', planta, name='planta'),

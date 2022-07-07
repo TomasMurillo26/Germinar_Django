@@ -54,18 +54,6 @@
                     <td><a class="btn-login" href="{% url 'planta' i.idProducto %}">Ver producto</a></td>
                 </div>
             </div>
-            <div class="producto">
-                <div class="prod">
-                    <div class="producto__imagen">
-                        <img src="{{i.imagenProducto.url}}" alt="imagen planta">
-                    </div>
-                    <div class="producto__informacion">
-                        <p class="producto__nombre">{{i.nombreProducto}}</p>
-                        <p class="producto__precio">${{i.precio | intcomma}}</p>
-                    </div>
-                    <td><a class="btn-login" href="{% url 'planta' i.idProducto %}">Ver producto</a></td>
-                </div>
-            </div>
         </div>
     {% endfor %}
     <!--filtros referencia-->
