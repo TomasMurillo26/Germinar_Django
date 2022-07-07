@@ -23,39 +23,50 @@
     {% endblock%}
 
     {% block content %}
+
     <main class="grid-catalogo">
-        <section class="contenedor ">
-            <div class="titulo-catalogo nombre1">
-                <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
-                    Nuestros Productos
-                </h1>
-            </div>
-        </section>
-    </main>
-
-    <!--filtros referencia-->
-    <form method="GET">
-        {{ filter.form|bootstrap }}
-        <button type="submit" class="btn btn-primary">Filtrar</button>
-    </form>
-    <hr>
-
-    {% for i in filter.qs %}
-        <div class='filtros contenedor-filtros'>
-            <div class="producto">
-                <div class="prod">
-                    <div class="producto__imagen">
-                        <img src="{{i.imagenProducto.url}}" alt="imagen planta">
-                    </div>
-                    <div class="producto__informacion">
-                        <p class="producto__nombre">{{i.nombreProducto}}</p>
-                        <p class="producto__precio">${{i.precio | intcomma}}</p>
-                    </div>
-                    <td><a class="btn-login" href="{% url 'planta' i.idProducto %}">Ver producto</a></td>
+        <aside class="side-bar contenedor">
+            <!--filtros referencia-->
+            <form method="GET" class="filtros contenedor-filtros">
+                <h3>Filtros</h3>
+                <div class="form-check">
+                    {{ filter.form|bootstrap }}
                 </div>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+            <hr>
+        </aside>
+
+        <div>
+            <section class="contenedor ">
+                <div class="titulo-catalogo nombre1">
+                    <h1 class="titulo-catalogo" style="border-bottom: solid 3px var(--verdeOscuro);" >
+                        Nuestros Productos
+                    </h1>
+                </div>
+            </section>
+            <div class='catalogo'>
+                {% for i in filter.qs %}
+                    <div class='filtros contenedor-plantas catalogo'>
+                        <div class="producto contenedor2 card">
+                            <div class="prod">
+                                <div class="producto__imagen">
+                                    <img src="{{i.imagenProducto.url}}" alt="imagen planta">
+                                </div>
+                                <div class="producto__informacion">
+                                    <p class="producto__nombre">{{i.nombreProducto}}</p>
+                                    <p class="producto__precio">${{i.precio | intcomma}}</p>
+                                </div>
+                                <td><a class="btn-login" href="{% url 'planta' i.idProducto %}">Ver producto</a></td>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    {% endfor %}
+
+    </main>
+
     <!--filtros referencia-->
 
     {% endblock %}
