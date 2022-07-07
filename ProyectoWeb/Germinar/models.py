@@ -9,6 +9,7 @@ from rest_framework.authtoken.models import Token
 
 # Create your models here.
 class catProducto(models.Model):
+    idCategoria = models.IntegerField(primary_key=True, verbose_name= 'Id Categoria')
     nombreCategoria = models.CharField(max_length=30,blank=True, null=True, verbose_name= 'Nombre categoria')
 
     def __str__(self):
